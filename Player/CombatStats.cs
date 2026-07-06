@@ -18,6 +18,10 @@ public class CombatStats
         BaseAttack = attack;
         BaseDefence = defence;
     }
-      
+    public void AdjustStatus(int attackIncreament, int defenceIncreament)
+    {
+        BaseAttack += attackIncreament;
+        BaseDefence += defenceIncreament;
+    }
 }
 
