@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameProject.Map
 {
+    public class Field : MapBase
+    {
+        public Field() : base(001, "초원")
+        {
+
+        }
+    }
     public class Forest : MapBase
     {
-        public Forest() : base(001, "숲")
+        public Forest() : base(002, "숲")
         {
 
         }

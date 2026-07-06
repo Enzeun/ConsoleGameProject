@@ -10,6 +10,8 @@ namespace ConsoleGameFramework.Player;
 
 public abstract class Player : IDamageable
 {
+
+    // 기본 필드
     public VitalStats VitalStats { get; private set; }
 
     public int CurrentHp => VitalStats.Hp;
@@ -18,11 +20,29 @@ public abstract class Player : IDamageable
 
     private bool _isDead = false;
     // --------------------------------------------------------
+    protected string? JobName;
+
+
+    // --------------------------------------------------------
+    // 기본값이 있는 필드들 
+    private int _maxLevel = 10;
+
+    private int _level = 1;
+
+    private int[] _maxExpOfLevel =
+    {
+        100,150,225,325,450,600,750,925,1125
+    };
+
+    private int _currentExp = 0;
+
+    // --------------------------------------------------------
 
     public CombatStats CombatStats { get; private set; }
 
+    // --------------------------------------------------------
 
-
+    // 생성자
     public Player(int maxHp, int maxMp, int attack, int defence)
     {
 
@@ -31,7 +51,7 @@ public abstract class Player : IDamageable
     }
 
     // 공격력 가져오기
-    public int FinalAttack => CombatStats.BaseAttack; 
+    public int FinalAttack => CombatStats.BaseAttack;
 
 
     // 데미지 계산
@@ -60,23 +80,91 @@ public abstract class Player : IDamageable
         OnDied?.Invoke();
     }
 
+    // 경험치 얻는 함수
+    protected virtual void GainExp(int expGain)
+    {
+        // 만렙이면 경험치 X
+        if (_level == 10)
+            return;
+
+        _currentExp = _currentExp + expGain;
+
+        if (_currentExp >= _maxExpOfLevel[_level - 1])
+        {
+            _currentExp -= _maxExpOfLevel[_level - 1];
+
+            LevelUp();
+        }
+
+        OnGainExp?.Invoke();
+    }
+
+    // 레벨 업
+    protected virtual void LevelUp()
+    {
+        _level++;
+
+        if (_level == 10)
+        {
+            _currentExp = _maxExpOfLevel[_level - 1];
+        }
+
+        OnLevelUp?.Invoke();
+    }
+
+
     // 플레이어 죽음
     public event Action? OnDied;
     // 체력이 변경될 때. 
     public event Action<VitalStats>? OnHpChanged;
 
+    // 경험치 얻을 때
+    public event Action? OnGainExp;
+    // 레벨업 했을 때
+    public event Action? OnLevelUp;
 }
+
+
+//-----------------------------------------------------------------------------------------------
+// 아래는 직업 별 클래스
 
 public class Worrior : Player
 {
-    public Worrior() : base(150, 50, 50, 10)
+    public Worrior() : base(300, 50, 50, 10)
     {
-
+        JobName = "전사";
     }
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
     }
 
+    protected override void LevelUp()
+    {
+        VitalStats.AdjustStatus(50, 10);
+        CombatStats.AdjustStatus(15, 5);
+
+        base.LevelUp();
+    }
+}
+
+public class Mage : Player
+{
+    public Mage() : base(200, 100, 20, 5)
+    {
+        JobName = "마법사";
+
+    }
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+    }
+    protected override void LevelUp()
+    {
+        VitalStats.AdjustStatus(30, 20);
+        CombatStats.AdjustStatus(10, 3);
+
+        base.LevelUp();
+    }
 }
 
