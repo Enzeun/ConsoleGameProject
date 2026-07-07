@@ -14,26 +14,26 @@ public class MapScene : SceneBase
 {
     public override SceneKey Key => SceneKey.Map;
 
-    MapBase currentMap;
-    MapBase nextMap;
+    MapBase CurrentMap;
+    MapBase NextMap;
+    bool isLastMap = false;
 
     public override void Enter(GameContext context)
     {
-        currentMap = GameManager.Instance.CurrentMap;
-        nextMap = GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId];
+        CurrentMap = GameManager.Instance.CurrentMap;
+        NextMap = GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId];
         context.AddLog("맵 화면 입니다.");
-        
-        bool isLastMap = false;
+
 
         MenuOption NextMapMenu = new MenuOption
         (
             2,
             "다음 맵으로 이동한다.",
-            $"{nextMap.Name} 으로 이동. (레벨'{nextMap.EnterLevel}' 이상 진입 가능)",
-            (GameManager.Instance.Player.Level >= nextMap.EnterLevel)
+            $"{NextMap.Name} 으로 이동. (레벨'{NextMap.EnterLevel}' 이상 진입 가능)",
+            (GameManager.Instance.Player.Level >= NextMap.EnterLevel)
         );
 
-        if (currentMap.GetType() == typeof(Castle))
+        if (CurrentMap.GetType() == typeof(Castle))
         {
 
             isLastMap = true;
@@ -62,7 +62,7 @@ public class MapScene : SceneBase
     {
         ConsoleUI.Clear();
 
-        ConsoleUI.WriteTitle($"{currentMap.Name}", "이 곳은 어디?");
+        ConsoleUI.WriteTitle($"{CurrentMap.Name}", "이 곳은 어디?");
 
 
 
@@ -90,12 +90,16 @@ public class MapScene : SceneBase
         switch (choice)
         {
             case 1:
-                context.AddLog("1을 눌렀습니다");
+                context.AddLog("1을 눌렀습니다"); // 디버깅
 
                 break;
             case 2:
-                GameManager.Instance.ChangeMap(GameManager.Instance.CurrentMap.NextMapId);
-                GoTo(context, SceneKey.Map);
+                if (!isLastMap)
+                {
+                    //GameManager.Instance.ChangeMap(NextMap.Id);
+                    GoTo(context, SceneKey.PopUpNaxtMap);
+                }
+                context.AddLog("마지막 맵입니다"); // 디버깅
                 break;
 
             case 3:
