@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace ConsoleGameFramework.Player;
 
 
-
-public abstract class Player : IDamageable
+public abstract class PlayerBase : IDamageable
 {
 
     // 기본 필드
+    public string Name { get; set; }
     public VitalStats VitalStats { get; private set; }
 
     public int CurrentHp => VitalStats.Hp;
@@ -21,7 +21,7 @@ public abstract class Player : IDamageable
 
     private bool _isDead = false;
     // --------------------------------------------------------
-    protected string? JobName;
+    public string JobName;
 
 
     // --------------------------------------------------------
@@ -48,7 +48,7 @@ public abstract class Player : IDamageable
     // --------------------------------------------------------
 
     // 생성자
-    public Player(int maxHp, int maxMp, int attack, int defence)
+    public PlayerBase(int maxHp=100, int maxMp=50, int attack=10, int defence=10)
     {
 
         VitalStats = new VitalStats(maxHp, maxMp);
@@ -140,9 +140,9 @@ public abstract class Player : IDamageable
 //-----------------------------------------------------------------------------------------------
 // 아래는 직업 별 클래스
 
-public class Worrior : Player
+public class Warrior : PlayerBase
 {
-    public Worrior() : base(300, 50, 50, 10)
+    public Warrior() : base(300, 50, 50, 10)
     {
         JobName = "전사";
     }
@@ -160,7 +160,7 @@ public class Worrior : Player
     }
 }
 
-public class Mage : Player
+public class Mage : PlayerBase
 {
     public Mage() : base(200, 100, 20, 5)
     {

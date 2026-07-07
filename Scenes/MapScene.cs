@@ -61,25 +61,39 @@ public class MapScene : SceneBase
     public override void Render(GameContext context)
     {
         ConsoleUI.Clear();
+        // ---------------------------타이틀 시작하는 곳---------------------------------------------------------
 
         ConsoleUI.WriteTitle($"{CurrentMap.Name}", "이 곳은 어디?");
 
+        // ---------------------------타이틀 끝나는 곳---------------------------------------------------------
 
+
+        // ---------------------------플레이어 정보---------------------------------------------------------
+        ConsoleUI.WriteKeyValue($"[{GameManager.Instance.Player.JobName}]", $"[{GameManager.Instance.Player.Name}]",  10);
+        ConsoleUI.WriteStatusBar("HP", GameManager.Instance.Player.CurrentHp, GameManager.Instance.Player.MaxHp);
+
+
+        // ---------------------------플레이어 정보---------------------------------------------------------
+
+
+        // ---------------------------메뉴---------------------------------------------------------
 
         ConsoleUI.WriteMenu(Menu, "행동 선택");
 
-
+        // ---------------------------로그---------------------------------------------------------
         ConsoleUI.WriteLog(context.Logs);
     }
 
     private static readonly List<MenuOption> Menu = new List<MenuOption>
     {
-        new MenuOption(1, "주변을 둘러본다."),
+        new MenuOption(1, "주변을 둘러본다.", "몬스터와 조우합니다."),
         new MenuOption(2, "다음 맵으로."),
 
         new MenuOption(3, "레벨업."), // 디버깅용
 
-        new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
+        
+
+        //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다.")
     };
 
@@ -93,19 +107,22 @@ public class MapScene : SceneBase
                 context.AddLog("1을 눌렀습니다"); // 디버깅
 
                 break;
+
             case 2:
-                if (!isLastMap)
+                if (ConsoleUI.Confirm("정말 이동 하시겠습니까? *이동 한 후에는 다시 되돌아갈 수 없습니다."))
                 {
-                    //GameManager.Instance.ChangeMap(NextMap.Id);
-                    GoTo(context, SceneKey.PopUpNaxtMap);
+                    GameManager.Instance.ChangeMap(NextMap.Id);
+                    GoTo(context, SceneKey.Map);
                 }
                 context.AddLog("마지막 맵입니다"); // 디버깅
                 break;
 
             case 3:
+
                 GameManager.Instance.Player.GainExp(100);
-                GoTo(context, SceneKey.Map);
+                //GoTo(context, SceneKey.Map);
                 break;
+
 
             case 9:
                 GoTo(context, SceneKey.NewTitle);
