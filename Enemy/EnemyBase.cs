@@ -28,7 +28,7 @@ public class EnemyBase
 
     }
 
-    public virtual void TakeDamege(int damage) 
+    public virtual void TakeDamage(int damage) 
     { 
         // 죽으면 스킵
         if (_isDead)

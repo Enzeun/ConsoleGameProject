@@ -22,13 +22,28 @@ internal class BattleScene : SceneBase
     /// </summary>
     int menuHandler = 1;
 
+    private string _infoString = "";
 
     public override void Enter(GameContext context)
     {
         context.AddLog("배틀화면 진입");
         context.Random.Next(0, 3);
+        // 랜덤 적 생성
         Enemy = new EnemyBase("슬라임", 100);
+        // 죽으면 이벤트 구독
+        Enemy.OnDied += WinBattle;
         menuHandler = 1; // 초기화
+        hasWin = false;
+        _infoString = "적과 조우했습니다!";
+    }
+
+    private void WinBattle()
+    {
+        hasWin = true;
+
+        _infoString = "승리했습니다!!";
+
+        Enemy.OnDied -= WinBattle;
     }
 
     public override void Render(GameContext context)
@@ -62,10 +77,13 @@ internal class BattleScene : SceneBase
 
         // 몬스터 이름 : HP 바
         ConsoleUI.WriteStatusBar($"{Enemy.Name}", Enemy.Hp, Enemy.MaxHp, 24, ConsoleColor.DarkRed);
+        // --------------------------- (빈칸)  ---------------------------------------------------------
+        
+        ConsoleUI.WriteLine();
+        ConsoleUI.WriteLine();
 
         // ---------------------------플레이어 정보---------------------------------------------------------
-        ConsoleUI.WriteLine();
-        ConsoleUI.WriteLine();
+        
 
         ConsoleUI.WriteLine("  .----. ");
         ConsoleUI.WriteLine("  |   -| ");
@@ -77,9 +95,8 @@ internal class BattleScene : SceneBase
         ConsoleUI.WriteKeyValue($"[{GameManager.Instance.Player.JobName}]", $"[{GameManager.Instance.Player.Name}]", 10);
         ConsoleUI.WriteStatusBar("HP", GameManager.Instance.Player.CurrentHp, GameManager.Instance.Player.MaxHp);
 
-
         // ---------------------------로그---------------------------------------------------------
-        ConsoleUI.WriteLog(context.Logs);
+        //ConsoleUI.WriteLog(context.Logs);
     }
     //기본메뉴
     private static readonly List<MenuOption> Menu = new List<MenuOption>
@@ -99,6 +116,8 @@ internal class BattleScene : SceneBase
         new MenuOption(1, "1번스킬"),
         new MenuOption(2, "2번스킬"),
 
+        new MenuOption(0, "취소"),
+
     };
 
     //인벤토리 메뉴
@@ -106,54 +125,121 @@ internal class BattleScene : SceneBase
     {
         new MenuOption(1, "기본 공격"),
         new MenuOption(2, "스킬 사용"),
-        new MenuOption(3, "인벤토리 열기"),                
+
+        new MenuOption(0, "취소"),
 
     };
 
+    private bool _isPlayerTurn = true;
+
+    private void NextTurn()
+    {
+        _isPlayerTurn = !_isPlayerTurn;
+        
+    }
+
+    private void PlayerAttack()
+    {
+        _infoString = "플레이어가 공격합니다!";
+                
+        Enemy.TakeDamage(GameManager.Instance.Player.FinalAttack);
+               
+        NextTurn();
+    }
+
+    private void EnemyAttack()
+    {
+        _infoString = "적이 공격합니다!";
+
+        GameManager.Instance.Player.TakeDamage(Enemy.Attack);
+
+        NextTurn();
+    }
 
     public override void HandleInput(GameContext context)
     {
-        switch (menuHandler)
+        ConsoleUI.WriteRule();
+        ConsoleUI.WriteCentered(_infoString);
+        ConsoleUI.WriteRule();
+        Thread.Sleep(500);
+
+        if (hasWin)
         {
-
-            // ---------------------------기본 메뉴---------------------------------------------------------
-            case 1:
-                ConsoleUI.WriteMenu(Menu, "행동 선택");
-                int choice = ConsoleUI.ReadMenuChoice(Menu);
-
-                switch (choice)
-                {
-                    case 1: // 기본공격
-                        context.AddLog("기본공격을 합니다"); // 디버깅
-                        Enemy.TakeDamege(GameManager.Instance.Player.FinalAttack);
-                        break;
-
-                    case 2: // 스킬 사용                    
-                        context.AddLog("스킬 메뉴를 엽니다"); // 디버깅
-                        menuHandler = 2;
-                        break;
-                }
-                break; 
-            case 2:
-                ConsoleUI.WriteMenu(SkillMenu, "행동 선택");
-                choice = ConsoleUI.ReadMenuChoice(Menu);
-                break;
-
-
-
-
-                // ---------------------------스킬 메뉴---------------------------------------------------------
-                // ---------------------------인벤토리 메뉴---------------------------------------------------------
-
-
-
-
-
+            GoTo(context, SceneKey.Map);
         }
 
+        if (_isPlayerTurn)
+        {
+            switch (menuHandler)
+            {
+
+                // ---------------------------기본 메뉴---------------------------------------------------------
+                case 1:
+                    ConsoleUI.WriteMenu(Menu, "행동 선택");
+                    int choice = ConsoleUI.ReadMenuChoice(Menu);
+
+                    switch (choice)
+                    {
+                        case 1: // 기본공격
+                            context.AddLog("기본공격을 합니다"); // 디버깅
+                            PlayerAttack();
+                            break;
+
+                        case 2: // 스킬창 열기                    
+                            context.AddLog("스킬 메뉴를 엽니다"); // 디버깅
+                            menuHandler = 2;
+                            break;
+
+                        case 3: // 인벤토리 열기                    
+                            context.AddLog("인벤토리를 엽니다"); // 디버깅
+                            menuHandler = 3;
+                            break;
+                    }
+                    break;
+                // ---------------------------스킬 메뉴---------------------------------------------------------
+                case 2:
+                    ConsoleUI.WriteMenu(SkillMenu, "행동 선택");
+                    choice = ConsoleUI.ReadMenuChoice(SkillMenu);
+
+                    switch (choice)
+                    {
+                        case 0: // 취소                    
+                            context.AddLog("스킬창 -> 선택메뉴"); // 디버깅
+                            menuHandler = 1;
+                            break;
+                    }
+
+                    break;
 
 
 
 
+                // ---------------------------인벤토리 메뉴---------------------------------------------------------
+                case 3:
+                    ConsoleUI.WriteMenu(InventoryMenu, "아이템 선택");
+                    choice = ConsoleUI.ReadMenuChoice(InventoryMenu);
+
+                    switch (choice)
+                    {
+                        case 0: // 취소                    
+                            context.AddLog("인벤토리 -> 선택메뉴"); // 디버깅
+                            menuHandler = 1;
+                            break;
+                    }
+
+                    break;
+
+            }
+        }
+        else if (!_isPlayerTurn)
+        {
+            if (!Enemy.IsAlive)
+            {
+                NextTurn();
+                return;
+            }
+            context.AddLog("적의 턴 입니다");
+            EnemyAttack();
+        }
     }
 }
