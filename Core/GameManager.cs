@@ -119,6 +119,8 @@ public class GameManager
     {
         ChangeScene(SceneKey.NewTitle);
 
+
+
         // 디버깅 용 건너뛰기 코드
         Player = new Mage();
         Player.Name = "현준";

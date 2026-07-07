@@ -55,19 +55,30 @@ public abstract class PlayerBase : IDamageable
         CombatStats = new CombatStats(attack, defence);
     }
 
-    // 공격력 가져오기
+    /// <summary>
+    /// 최종 공격력 (기본 공격력 + 장비 공격력)
+    /// </summary>
     public int FinalAttack => CombatStats.BaseAttack;
+     
+    /// <summary>
+    /// 최종 방어력 (기본 방어력 + 장비 방어력)
+    /// </summary>
+    public int FinalDefence => CombatStats.BaseDefence;
 
-
-    // 데미지 계산
+    /// <summary>
+    /// 데미지 계산
+    /// </summary>
+    /// <param name="damage"></param>
     public virtual void TakeDamage(int damage)
     {
         // 죽으면 스킵
         if (_isDead) return;
         // 이전 체력 기록 (방송 용)
         int prevHp = VitalStats.Hp;
+        // 데미지 계산
+        int newDamage = damage - FinalDefence;
         // 체력 변경
-        VitalStats.ChangeHp(-damage);
+        VitalStats.ChangeHp(-newDamage);
         // 이벤트 방송 (스탯 전달)
         if (prevHp != VitalStats.Hp)
             OnHpChanged?.Invoke(VitalStats);
@@ -78,14 +89,19 @@ public abstract class PlayerBase : IDamageable
         }
     }
 
-    // 죽는 이벤트 여기서 처리
+    /// <summary>
+    /// 죽는 이벤트 여기서 처리
+    /// </summary>
     protected virtual void Die()
     {
         _isDead = true;
         OnDied?.Invoke();
     }
 
-    // 경험치 얻는 함수
+    /// <summary>
+    /// 경험치 얻는 함수
+    /// </summary>
+    /// <param name="expGain"></param>
     public virtual void GainExp(int expGain)
     {
         // 만렙이면 경험치 X
@@ -110,7 +126,9 @@ public abstract class PlayerBase : IDamageable
         OnGainExp?.Invoke();
     }
 
-    // 레벨 업
+    /// <summary>
+    /// 레벨 업
+    /// </summary>
     protected virtual void LevelUp()
     {
         _level++;
