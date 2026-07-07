@@ -14,24 +14,26 @@ public class MapScene : SceneBase
 {
     public override SceneKey Key => SceneKey.Map;
 
+    MapBase currentMap;
+    MapBase nextMap;
+
     public override void Enter(GameContext context)
     {
+        currentMap = GameManager.Instance.CurrentMap;
+        nextMap = GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId];
         context.AddLog("맵 화면 입니다.");
-
+        
         bool isLastMap = false;
 
         MenuOption NextMapMenu = new MenuOption
-            (
-
+        (
             2,
             "다음 맵으로 이동한다.",
-            $"{GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId]} 으로 이동",
-            (GameManager.Instance.Player.Level >= GameManager.Instance.CurrentMap.EnterLevel)
+            $"{nextMap.Name} 으로 이동. (레벨'{nextMap.EnterLevel}' 이상 진입 가능)",
+            (GameManager.Instance.Player.Level >= nextMap.EnterLevel)
         );
 
-        string NextMap = $"{GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId]} 으로 이동";
-
-        if (GameManager.Instance.CurrentMap.GetType() == typeof(Castle))
+        if (currentMap.GetType() == typeof(Castle))
         {
 
             isLastMap = true;
@@ -40,12 +42,18 @@ public class MapScene : SceneBase
             (
             2,
             "마왕과 전투한다",
-            $"{GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId]} 으로 이동",
+            $"보스 티켓이 있으면 전투를 시작할 수 있습니다",
             false
             );
-            // 키가 있으면 전투메뉴 활성화 구현 필요 **
+            // 키가 있으면 전투메뉴 활성화 << 구현 필요 **
         }
-        Menu.Insert(1, NextMapMenu);
+
+
+
+        if (!Menu.Contains(NextMapMenu))
+        {
+            Menu[1] = NextMapMenu;
+        }
 
 
     }
@@ -54,13 +62,22 @@ public class MapScene : SceneBase
     {
         ConsoleUI.Clear();
 
-        ConsoleUI.WriteMenu(Menu, "시작 메뉴");
+        ConsoleUI.WriteTitle($"{currentMap.Name}", "이 곳은 어디?");
 
+
+
+        ConsoleUI.WriteMenu(Menu, "행동 선택");
+
+
+        ConsoleUI.WriteLog(context.Logs);
     }
 
     private static readonly List<MenuOption> Menu = new List<MenuOption>
     {
         new MenuOption(1, "주변을 둘러본다."),
+        new MenuOption(2, "다음 맵으로."),
+
+        new MenuOption(3, "레벨업."), // 디버깅용
 
         new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다.")
@@ -74,13 +91,22 @@ public class MapScene : SceneBase
         {
             case 1:
                 context.AddLog("1을 눌렀습니다");
+
                 break;
             case 2:
-                GoTo(context, SceneKey.Title);
+                GameManager.Instance.ChangeMap(GameManager.Instance.CurrentMap.NextMapId);
+                GoTo(context, SceneKey.Map);
                 break;
+
+            case 3:
+                GameManager.Instance.Player.GainExp(100);
+                GoTo(context, SceneKey.Map);
+                break;
+
             case 9:
-                GoTo(context, SceneKey.Title);
+                GoTo(context, SceneKey.NewTitle);
                 break;
+
             case 0:
                 context.Game.RequestQuit();
                 break;

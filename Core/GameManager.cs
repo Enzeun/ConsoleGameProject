@@ -32,6 +32,7 @@ public class GameManager
         AddMaps(new Forest());
         AddMaps(new Grave());
         AddMaps(new Castle());
+        AddMaps(new Dummy());
 
         CurrentMap = Maps[001];
     }
