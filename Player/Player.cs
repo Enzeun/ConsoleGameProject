@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameFramework.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ public abstract class Player : IDamageable
 
     private int[] _maxExpOfLevel =
     {
-        100,150,225,325,450,600,750,925,1125
+        100,150,225,325,450,600,750,925,1125,1500,999999
     };
 
     private int _currentExp = 0;
@@ -85,11 +86,15 @@ public abstract class Player : IDamageable
     }
 
     // 경험치 얻는 함수
-    protected virtual void GainExp(int expGain)
+    public virtual void GainExp(int expGain)
     {
         // 만렙이면 경험치 X
         if (_level == 10)
+        {
+            GameManager.Instance.Context.AddLog($"더 이상 경험치를 얻을 수 없습니다"); // 디버깅
             return;
+
+        }
 
         _currentExp = _currentExp + expGain;
 
@@ -99,6 +104,8 @@ public abstract class Player : IDamageable
 
             LevelUp();
         }
+
+        GameManager.Instance.Context.AddLog($"경험치를 {expGain} 얻었습니다"); // 디버깅
 
         OnGainExp?.Invoke();
     }
@@ -113,6 +120,7 @@ public abstract class Player : IDamageable
             _currentExp = _maxExpOfLevel[_level - 1];
         }
 
+        GameManager.Instance.Context.AddLog("레벨업 했습니다"); // 디버깅
         OnLevelUp?.Invoke();
     }
 
