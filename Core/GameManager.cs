@@ -20,24 +20,43 @@ namespace ConsoleGameFramework.Core;
 /// </summary>
 public class GameManager
 {
+    // ----------------------------------------------------------------------------------------------
     // 맵 정보 등록
     public readonly Dictionary<int,MapBase> Maps = new Dictionary<int,MapBase>();
+    public string CurrentMap { get; private set; }
 
     private void RegisterMaps()
     {
         AddMaps(new GrassField());
+        AddMaps(new Forest());
+        AddMaps(new Grave());
+        AddMaps(new Castle());
 
     }
     private void AddMaps(MapBase map)
     {
         Maps[map.Id] = map;
     }
+    public void ChangeMap(int id)
+    {
+        if (Maps.TryGetValue(id, out MapBase? map))
+            CurrentMap = map.Name!;
+        else
+            Context.AddLog("해당 맵은 없는 맵입니다.");
+            ConsoleUI.WriteLog(Context.Logs);
+    }
+
+    // ----------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------
 
 
-
-
+    // ----------------------------------------------------------------------------------------------
 
     public Worrior Player = new Worrior();
+
+    // ----------------------------------------------------------------------------------------------
 
     /// <summary>
     /// 아래는 기본구현이 완료되어있던 것 입니다
