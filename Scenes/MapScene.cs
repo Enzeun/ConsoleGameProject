@@ -72,6 +72,7 @@ public class MapScene : SceneBase
         ConsoleUI.WriteKeyValue($"[{GameManager.Instance.Player.JobName}]", $"[{GameManager.Instance.Player.Name}]",  10);
         ConsoleUI.WriteStatusBar("HP", GameManager.Instance.Player.CurrentHp, GameManager.Instance.Player.MaxHp);
 
+               
 
         // ---------------------------플레이어 정보---------------------------------------------------------
 
@@ -88,11 +89,11 @@ public class MapScene : SceneBase
     {
         new MenuOption(1, "주변을 둘러본다.", "몬스터와 조우합니다."),
         new MenuOption(2, "다음 맵으로."),
+        new MenuOption(3, "인벤토리 확인."),
+        new MenuOption(4, "플레이어 상태 확인."),
+                
 
-        new MenuOption(3, "레벨업."), // 디버깅용
-
-        
-
+        //new MenuOption(9, "레벨업."), // 디버깅용
         //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다.")
     };
@@ -104,8 +105,8 @@ public class MapScene : SceneBase
         switch (choice)
         {
             case 1:
-                context.AddLog("1을 눌렀습니다"); // 디버깅
-
+                //context.AddLog("1을 눌렀습니다"); // 디버깅
+                GoTo(context,SceneKey.BattleScene);
                 break;
 
             case 2:

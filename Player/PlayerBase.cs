@@ -154,7 +154,7 @@ public class Warrior : PlayerBase
     protected override void LevelUp()
     {
         VitalStats.AdjustStatus(50, 10);
-        CombatStats.AdjustStatus(15, 5);
+        CombatStats.AdjustStatus(10, 5);
 
         base.LevelUp();
     }
@@ -162,7 +162,7 @@ public class Warrior : PlayerBase
 
 public class Mage : PlayerBase
 {
-    public Mage() : base(200, 100, 20, 5)
+    public Mage() : base(200, 100, 20, 7)
     {
         JobName = "마법사";
 
@@ -173,8 +173,8 @@ public class Mage : PlayerBase
     }
     protected override void LevelUp()
     {
-        VitalStats.AdjustStatus(30, 20);
-        CombatStats.AdjustStatus(10, 3);
+        VitalStats.AdjustStatus(40, 20);
+        CombatStats.AdjustStatus(7, 3);
 
         base.LevelUp();
     }

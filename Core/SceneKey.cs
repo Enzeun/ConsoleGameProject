@@ -16,4 +16,6 @@ public enum SceneKey
     Map,
     Loading,
     PopUpNaxtMap,
+    BattleScene,
+
 }

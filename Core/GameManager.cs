@@ -103,8 +103,7 @@ public class GameManager
         AddScene(new SampleScene());
         AddScene(new ScenePractice());
         AddScene(new MapScene());
-        AddScene(new LoadingScene());
-        AddScene(new PopUpNaxtMapScene());
+        AddScene(new BattleScene());
     }
 
     private void AddScene(IScene scene)
@@ -119,6 +118,15 @@ public class GameManager
     public void Run()
     {
         ChangeScene(SceneKey.NewTitle);
+
+        // 디버깅 용 건너뛰기 코드
+        Player = new Mage();
+        Player.Name = "현준";
+        ChangeScene(SceneKey.BattleScene);
+        // 디버깅 용 건너뛰기 코드
+
+        
+
 
         while (Context.IsRunning && _currentScene is not null)
         {
