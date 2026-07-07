@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameFramework.Player;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameProject.Enemy;
 
-public class EnemyBase
+public class EnemyBase : IDamageable
 {
     public string Name { get; protected set; }
     public int MaxHp { get; protected set; }
     private int _hp;
-    public int Hp
+    public int CurrentHp
     {
         get => _hp;
         set => _hp = Math.Clamp(value, 0, MaxHp);
@@ -24,7 +25,7 @@ public class EnemyBase
     public EnemyBase(string name, int maxHp)
     {
         MaxHp = maxHp;
-        Hp = MaxHp;
+        CurrentHp = MaxHp;
 
     }
 
@@ -34,8 +35,8 @@ public class EnemyBase
         if (_isDead)
             return;
         // 데미지 계산
-        int newDamage = damage - Defence;
-        Hp -= newDamage;
+        int newDamage = Math.Max(damage - Defence,1);
+        CurrentHp -= newDamage;
         // 체력 변경
         // 0이되면 사망처리
         if (_hp == 0)
