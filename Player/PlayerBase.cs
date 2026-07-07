@@ -21,7 +21,7 @@ public abstract class PlayerBase : IDamageable
 
     private bool _isDead = false;
     // --------------------------------------------------------
-    public string JobName;
+    public string JobName {  get; protected set; }
 
 
     // --------------------------------------------------------
@@ -76,7 +76,7 @@ public abstract class PlayerBase : IDamageable
         // 이전 체력 기록 (방송 용)
         int prevHp = VitalStats.Hp;
         // 데미지 계산
-        int newDamage = damage - FinalDefence;
+        int newDamage = Math.Max( damage - FinalDefence,1);
         // 체력 변경
         VitalStats.ChangeHp(-newDamage);
         // 이벤트 방송 (스탯 전달)

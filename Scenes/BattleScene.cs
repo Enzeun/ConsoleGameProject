@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleGameProject.Enemy;
+using ConsoleGameFramework.Player;
 
 namespace ConsoleGameProject.Scenes;
 
@@ -14,6 +15,8 @@ internal class BattleScene : SceneBase
     public override SceneKey Key => SceneKey.BattleScene;
 
     private bool hasWin = false;
+
+    private PlayerBase Player;
 
     public EnemyBase Enemy;
 
@@ -26,6 +29,7 @@ internal class BattleScene : SceneBase
 
     public override void Enter(GameContext context)
     {
+        Player = GameManager.Instance.Player;
         context.AddLog("배틀화면 진입");
         context.Random.Next(0, 3);
         // 랜덤 적 생성
@@ -76,7 +80,7 @@ internal class BattleScene : SceneBase
 
 
         // 몬스터 이름 : HP 바
-        ConsoleUI.WriteStatusBar($"{Enemy.Name}", Enemy.Hp, Enemy.MaxHp, 24, ConsoleColor.DarkRed);
+        ConsoleUI.WriteStatusBar($"{Enemy.Name}", Enemy.CurrentHp, Enemy.MaxHp, 24, ConsoleColor.DarkRed);
         // --------------------------- (빈칸)  ---------------------------------------------------------
         
         ConsoleUI.WriteLine();
@@ -92,8 +96,9 @@ internal class BattleScene : SceneBase
 
 
         // ---------------------------플레이어 정보---------------------------------------------------------
-        ConsoleUI.WriteKeyValue($"[{GameManager.Instance.Player.JobName}]", $"[{GameManager.Instance.Player.Name}]", 10);
-        ConsoleUI.WriteStatusBar("HP", GameManager.Instance.Player.CurrentHp, GameManager.Instance.Player.MaxHp);
+        ConsoleUI.WriteKeyValue($"[{Player.JobName}]", $"[{Player.Name}]", 10);
+        ConsoleUI.WriteLine($"Lv.{Player.Level}");
+        ConsoleUI.WriteStatusBar("HP", Player.CurrentHp, Player.MaxHp);
 
         // ---------------------------로그---------------------------------------------------------
         //ConsoleUI.WriteLog(context.Logs);
@@ -142,7 +147,7 @@ internal class BattleScene : SceneBase
     {
         _infoString = "플레이어가 공격합니다!";
                 
-        Enemy.TakeDamage(GameManager.Instance.Player.FinalAttack);
+        Enemy.TakeDamage(Player.FinalAttack);
                
         NextTurn();
     }
@@ -151,7 +156,7 @@ internal class BattleScene : SceneBase
     {
         _infoString = "적이 공격합니다!";
 
-        GameManager.Instance.Player.TakeDamage(Enemy.Attack);
+        Player.TakeDamage(Enemy.Attack);
 
         NextTurn();
     }

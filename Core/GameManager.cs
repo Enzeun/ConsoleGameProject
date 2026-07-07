@@ -34,7 +34,7 @@ public class GameManager
         AddMaps(new Castle());
         AddMaps(new Dummy());
 
-        CurrentMap = Maps[001];
+        CurrentMap = Maps[1];
     }
     private void AddMaps(MapBase map)
     {
@@ -62,7 +62,7 @@ public class GameManager
 
     // ----------------------------------------------------------------------------------------------
 
-    public PlayerBase Player;
+    public PlayerBase Player { get; private set; }
 
     public void InitializePlayer(PlayerBase job)
     {
