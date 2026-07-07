@@ -6,16 +6,31 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameProject.Map
 {
-    public class Field : MapBase
+    public class GrassField : MapBase
     {
-        public Field() : base(001, "초원")
+        public GrassField() : base(001, "초원",1)
         {
 
         }
     }
     public class Forest : MapBase
     {
-        public Forest() : base(002, "숲")
+        public Forest() : base(002, "숲",3)
+        {
+
+        }
+    }
+    public class Grave : MapBase
+    {
+        public Grave() : base(003, "묘지",6)
+        {
+
+        }
+    }
+    
+    public class Castle : MapBase
+    {
+        public Castle() : base(005, "마왕성",9)
         {
 
         }

@@ -10,11 +10,14 @@ namespace ConsoleGameProject.Map
     {
         public readonly int Id;
         public readonly string? Name;
+        public readonly int EnterLevel;
 
-        public MapBase(int id, string name)
+        public MapBase(int id, string name, int enterLever)
         {
             Id = id;
             Name = name;
+            EnterLevel = enterLever;
+
         }
     }
 }

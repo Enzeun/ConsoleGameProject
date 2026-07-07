@@ -1,6 +1,7 @@
 using ConsoleGameFramework.Scenes;
 using ConsoleGameFramework.UI;
 using ConsoleGameFramework.Player;
+using ConsoleGameProject.Map;
 
 namespace ConsoleGameFramework.Core;
 
@@ -19,10 +20,31 @@ namespace ConsoleGameFramework.Core;
 /// </summary>
 public class GameManager
 {
+    // 맵 정보 등록
+    public readonly Dictionary<int,MapBase> Maps = new Dictionary<int,MapBase>();
+
+    private void RegisterMaps()
+    {
+        AddMaps(new GrassField());
+
+    }
+    private void AddMaps(MapBase map)
+    {
+        Maps[map.Id] = map;
+    }
+
+
+
+
+
+    public Worrior Player = new Worrior();
+
+    /// <summary>
+    /// 아래는 기본구현이 완료되어있던 것 입니다
+    /// </summary>
     private readonly Dictionary<SceneKey, IScene> _scenes = new Dictionary<SceneKey, IScene>();
     private IScene? _currentScene;
     
-    public Worrior Player = new Worrior();
 
     /// <summary>
     /// 프로그램 전체에서 하나만 사용하는 GameManager 인스턴스입니다.
@@ -33,6 +55,7 @@ public class GameManager
     {
         Context = new GameContext(this);
         RegisterScenes();
+        RegisterMaps();
     }
 
     public GameContext Context { get; }
