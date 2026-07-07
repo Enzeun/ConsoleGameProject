@@ -10,7 +10,7 @@ namespace ConsoleGameProject.Map
     {
         public GrassField() : base(001, "초원",1)
         {
-
+            NextMapId = 002;
         }
     }
     public class Forest : MapBase

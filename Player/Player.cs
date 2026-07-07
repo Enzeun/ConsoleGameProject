@@ -28,6 +28,10 @@ public abstract class Player : IDamageable
     private int _maxLevel = 10;
 
     private int _level = 1;
+    public int Level
+    {
+        get => _level;
+    }
 
     private int[] _maxExpOfLevel =
     {

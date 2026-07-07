@@ -2,6 +2,7 @@ using ConsoleGameFramework.Scenes;
 using ConsoleGameFramework.UI;
 using ConsoleGameFramework.Player;
 using ConsoleGameProject.Map;
+using ConsoleGameProject.Scenes;
 
 namespace ConsoleGameFramework.Core;
 
@@ -23,7 +24,7 @@ public class GameManager
     // ----------------------------------------------------------------------------------------------
     // 맵 정보 등록
     public readonly Dictionary<int,MapBase> Maps = new Dictionary<int,MapBase>();
-    public string CurrentMap { get; private set; }
+    public MapBase CurrentMap { get; private set; } 
 
     private void RegisterMaps()
     {
@@ -32,6 +33,7 @@ public class GameManager
         AddMaps(new Grave());
         AddMaps(new Castle());
 
+        CurrentMap = Maps[001];
     }
     private void AddMaps(MapBase map)
     {
@@ -40,7 +42,7 @@ public class GameManager
     public void ChangeMap(int id)
     {
         if (Maps.TryGetValue(id, out MapBase? map))
-            CurrentMap = map.Name!;
+            CurrentMap = map;
         else
             Context.AddLog("해당 맵은 없는 맵입니다.");
             ConsoleUI.WriteLog(Context.Logs);
@@ -89,6 +91,7 @@ public class GameManager
         AddScene(new NewTitleScene());
         AddScene(new SampleScene());
         AddScene(new ScenePractice());
+        AddScene(new MapScene());
     }
 
     private void AddScene(IScene scene)
