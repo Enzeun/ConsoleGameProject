@@ -23,8 +23,8 @@ public class GameManager
 {
     // ----------------------------------------------------------------------------------------------
     // 맵 정보 등록
-    public readonly Dictionary<int,MapBase> Maps = new Dictionary<int,MapBase>();
-    public MapBase CurrentMap { get; private set; } 
+    public readonly Dictionary<int, MapBase> Maps = new Dictionary<int, MapBase>();
+    public MapBase CurrentMap { get; private set; }
 
     private void RegisterMaps()
     {
@@ -44,11 +44,16 @@ public class GameManager
     {
         if (Maps.TryGetValue(id, out MapBase? map))
             CurrentMap = map;
-        else
+        else // 예외 발생 시 더미 맵으로 덮어쓰기
+        {
             Context.AddLog("해당 맵은 없는 맵입니다.");
-            ConsoleUI.WriteLog(Context.Logs);
+            CurrentMap = Maps[999];
+        }
+        ConsoleUI.WriteLog(Context.Logs);
     }
 
+
+
     // ----------------------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------
@@ -57,7 +62,12 @@ public class GameManager
 
     // ----------------------------------------------------------------------------------------------
 
-    public Worrior Player = new Worrior();
+    public PlayerBase Player;
+
+    public void InitializePlayer(PlayerBase job)
+    {
+        Player = job;
+    }
 
     // ----------------------------------------------------------------------------------------------
 
@@ -66,7 +76,7 @@ public class GameManager
     /// </summary>
     private readonly Dictionary<SceneKey, IScene> _scenes = new Dictionary<SceneKey, IScene>();
     private IScene? _currentScene;
-    
+
 
     /// <summary>
     /// 프로그램 전체에서 하나만 사용하는 GameManager 인스턴스입니다.
@@ -93,6 +103,7 @@ public class GameManager
         AddScene(new SampleScene());
         AddScene(new ScenePractice());
         AddScene(new MapScene());
+        AddScene(new BattleScene());
     }
 
     private void AddScene(IScene scene)
@@ -107,6 +118,17 @@ public class GameManager
     public void Run()
     {
         ChangeScene(SceneKey.NewTitle);
+
+
+
+        // 디버깅 용 건너뛰기 코드
+        Player = new Mage();
+        Player.Name = "현준";
+        ChangeScene(SceneKey.BattleScene);
+        // 디버깅 용 건너뛰기 코드
+
+        
+
 
         while (Context.IsRunning && _currentScene is not null)
         {

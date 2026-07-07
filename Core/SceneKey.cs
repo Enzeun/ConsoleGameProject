@@ -14,4 +14,8 @@ public enum SceneKey
     Sample,
     Practice,
     Map,
+    Loading,
+    PopUpNaxtMap,
+    BattleScene,
+
 }
