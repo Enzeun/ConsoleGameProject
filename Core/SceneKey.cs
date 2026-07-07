@@ -13,5 +13,5 @@ public enum SceneKey
     NewTitle,
     Sample,
     Practice,
-
+    Map,
 }

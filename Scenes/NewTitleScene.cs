@@ -7,7 +7,7 @@ public class NewTitleScene : SceneBase
 {
     private static readonly List<MenuOption> Menu = new List<MenuOption>
     {
-        new MenuOption(1, "새로운 타이틀 입니다."),
+        new MenuOption(1, "모험을 시작합니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다.")
     };
 
@@ -31,7 +31,7 @@ public class NewTitleScene : SceneBase
         switch (choice)
         {
             case 1:
-                GoTo(context, SceneKey.Sample);
+                GoTo(context, SceneKey.Map);
                 break;
 
             case 0:
