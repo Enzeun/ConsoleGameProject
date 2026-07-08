@@ -1,4 +1,5 @@
 ﻿using ConsoleGameFramework.Core;
+using ConsoleGameProject.Skill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace ConsoleGameFramework.Player;
 
 
-public abstract class PlayerBase : IDamageable
+public abstract class PlayerBase : IDamageable, ISkillCaster
 {
 
     // 기본 필드
@@ -149,6 +150,11 @@ public abstract class PlayerBase : IDamageable
         OnLevelUp?.Invoke();
     }
 
+    public virtual void Heal(int amount)
+    {
+        VitalStats.ChangeHp(amount);
+    }
+
 
     // 플레이어 죽음
     public event Action? OnDied;
@@ -160,9 +166,22 @@ public abstract class PlayerBase : IDamageable
     // 레벨업 했을 때
     public event Action? OnLevelUp;
 
+    //--------------------스킬---------------------------------------------------------------------------
+
+    public List<SkillBase> SkillList {  get; protected set; }
+
+
+    public virtual void UseSkill(SkillBase skill, IDamageable target)
+    {
+        if (skill == null)
+            return;
+        else
+        {
+            skill.UseSkill(target);
+        }
+    }
+
     //--------------------인벤토리---------------------------------------------------------------------------
-
-
 
 }
 

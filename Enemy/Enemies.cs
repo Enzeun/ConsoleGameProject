@@ -32,7 +32,7 @@ public class Slime : EnemyBase
 }
 public class Wolf : EnemyBase
 {
-    public Wolf() : base("늑대", 70)
+    public Wolf() : base("늑대(?)", 70)
     {
         Attack = 20;
         Defence = 2;

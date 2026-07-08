@@ -142,9 +142,9 @@ internal class BattleScene : SceneBase
     //스킬 메뉴
     private static readonly List<MenuOption> SkillMenu = new List<MenuOption>
     {
-        new MenuOption(1, "1번스킬"),
-        new MenuOption(2, "2번스킬"),
-
+        //new MenuOption(1, "1번스킬"),
+        //new MenuOption(2, "2번스킬"),
+        
         new MenuOption(0, "취소"),
 
     };
@@ -232,6 +232,10 @@ internal class BattleScene : SceneBase
 
                     switch (choice)
                     {
+                        case 0: // 취소                    
+                            context.AddLog("스킬창 -> 선택메뉴"); // 디버깅
+                            menuHandler = 1;
+                            break;
                         case 0: // 취소                    
                             context.AddLog("스킬창 -> 선택메뉴"); // 디버깅
                             menuHandler = 1;
