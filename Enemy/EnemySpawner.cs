@@ -50,7 +50,7 @@ public class EnemySpawner
         };
     }
 
-    public Type SpawnEnemy()
+    public Type GetRandomEnemyType()
     {
         MapKey currentMap = GameManager.Instance.CurrentMap.Key;
 
@@ -58,6 +58,4 @@ public class EnemySpawner
 
         return (EnemiesInMap[currentMap][randomInt]);
     }
-
-
 }

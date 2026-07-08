@@ -29,10 +29,16 @@ internal class BattleScene : SceneBase
 
     public override void Enter(GameContext context)
     {
+        // 플레이어 객체 등록
         Player = GameManager.Instance.Player;
-        context.AddLog("배틀화면 진입");
-        context.Random.Next(0, 3);
+
+        // 디버깅
+        //context.AddLog("배틀화면 진입");    
+
         // 랜덤 적 생성
+        Type currentEnemyType = EnemySpawner.Instance.GetRandomEnemyType();
+        
+
         Enemy = new Slime();
         // 죽으면 이벤트 구독
         Enemy.OnDied += WinBattle;
