@@ -8,6 +8,5 @@ namespace ConsoleGameProject.Item
 {
     public interface IConsumable
     {
-        void Use();
     }
 }

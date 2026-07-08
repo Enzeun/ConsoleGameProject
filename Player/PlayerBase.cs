@@ -1,4 +1,5 @@
 ﻿using ConsoleGameFramework.Core;
+using ConsoleGameProject.Item;
 using ConsoleGameProject.Skill;
 using System;
 using System.Collections.Generic;
@@ -181,7 +182,7 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
 
     //--------------------스킬---------------------------------------------------------------------------
 
-    public List<SkillBase> SkillList {  get; protected set; }
+    public List<SkillBase> SkillList { get; protected set; }
 
 
     public virtual void UseSkill(SkillBase skill, IDamageable target)
@@ -194,8 +195,36 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
         }
     }
 
-    //--------------------인벤토리---------------------------------------------------------------------------
+    //--------------------장비 인벤토리---------------------------------------------------------------------------
+
+    public List<ItemBase> EquipmentInventory { get; protected set; }
+
+    public bool AddEquimentItem(ItemBase item)
+    {
+        if (EquipmentInventory.Contains(item))
+            return false;
+        else
+        {
+            EquipmentInventory.Add(item);
+            return true;
+        }
+    }
+
+    //--------------------아이템 인벤토리---------------------------------------------------------------------------
+    /// <summary>
+    /// 소비아이템 Dic<아이템id, 갯수>
+    /// </summary>
+    public Dictionary<int, int> ConsumableInventory { get; protected set; }
+
+    public void AddConsumableItem(ItemBase item)
+    {
+        if (ConsumableInventory.ContainsKey(item.Id))
+        {
+            ConsumableInventory[item.Id] += 1;
+        }
+
+        ConsumableInventory.Add(item.Id, 1);
+    }
+
 
 }
-
-

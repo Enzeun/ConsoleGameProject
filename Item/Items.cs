@@ -9,33 +9,112 @@ namespace ConsoleGameProject.Item;
 
 //---------------------무기--------------------------------------------------------------
 
-public class Sword : ItemBase, IEquipable
+public class RustedSword : Weapon, IEquipable
 {
 
-    public Sword() : base(001, "강철 검")
+    public RustedSword() : base(001, "녹슨 검")
     {
+        Attack = 10;
     }
 
-    public void Equip()
-    {
-
-    }
 }
 
+public class Sword : Weapon, IEquipable
+{
 
+    public Sword() : base(002, "일반 검")
+    {
+        Attack = 20;
+    }
 
+}
+public class IronSword : Weapon, IEquipable
+{
+
+    public IronSword() : base(003, "강철 검")
+    {
+        Attack = 40;
+    }
+
+}
+public class HollySword : Weapon, IEquipable
+{
+
+    public HollySword() : base(004, "성검")
+    {
+        Attack = 80;
+    }
+
+}
+public class RotenStaff : Weapon, IEquipable
+{
+
+    public RotenStaff() : base(005, "조잡한 지팡이")
+    {
+        Attack = 10;
+        CompatibleJob = "마법사";
+    }
+
+}
+public class WoodStaff : Weapon, IEquipable
+{
+
+    public WoodStaff() : base(006, "나무 지팡이")
+    {
+        Attack = 20;
+    }
+
+}
+public class Staff : Weapon, IEquipable
+{
+
+    public Staff() : base(007, "좋은 지팡이")
+    {
+        Attack = 40;
+    }
+
+}
+public class GreatStaff : Weapon, IEquipable
+{
+
+    public GreatStaff() : base(008, "마도사의 지팡이")
+    {
+        Attack = 80;
+    }
+
+}
 
 //---------------------방어구--------------------------------------------------------------
-public class Armor : ItemBase, IEquipable
+public class GrassArmor : Armor, IEquipable
 {
-    public Armor() : base(011, "철 갑옷")
+    public GrassArmor() : base(011, "거적떼기")
     {
-
+        Defence = 5;
     }
-    public void Equip()
+}
+public class RotenArmor : Armor, IEquipable
+{
+    public RotenArmor() : base(012, "녹슨 갑옷")
     {
-
+        Defence = 10;
     }
+    
+}
+public class IronArmor : Armor, IEquipable
+{
+    public IronArmor() : base(011, "철 갑옷")
+    {
+        Defence = 20;
+    }
+ 
+}
+public class ChainArmor : Armor, IEquipable
+{
+    public ChainArmor() : base(011, "체인 갑옷")
+    {
+        Defence = 30;
+    }
+   
 }
 
 
@@ -44,25 +123,25 @@ public class Armor : ItemBase, IEquipable
 
 //---------------------포션--------------------------------------------------------------
 
-public class HpPotion : ItemBase, IConsumable
+public class HpPotion : UsableItem, IConsumable
 {
     public HpPotion() : base(111, "HP 포션")
     {
 
     }
-    public void Use()
+    public override void Use()
     {
 
     }
 }
 
-public class MpPotion : ItemBase, IConsumable
+public class MpPotion : UsableItem, IConsumable
 {
     public MpPotion() : base(112, "MP 포션")
     {
 
     }
-    public void Use()
+    public override void Use()
     {
 
     }
@@ -73,13 +152,13 @@ public class MpPotion : ItemBase, IConsumable
 
 
 //---------------------기타--------------------------------------------------------------
-public class BossTicket : ItemBase
+public class BossTicket : UsableItem
 {
     public BossTicket() : base(999, "보스 티켓")
     {
 
     }
-    public void Use()
+    public override void Use()
     {
 
     }

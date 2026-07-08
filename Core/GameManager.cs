@@ -4,6 +4,7 @@ using ConsoleGameFramework.Player;
 using ConsoleGameProject.Map;
 using ConsoleGameProject.Scenes;
 using ConsoleGameProject.Player;
+using ConsoleGameProject.Item;
 
 namespace ConsoleGameFramework.Core;
 

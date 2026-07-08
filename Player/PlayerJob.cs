@@ -21,6 +21,7 @@ public class Warrior : PlayerBase
             new HeavyAttack(this),
             new FinalAttack(this),
         };
+
     }
     public override void TakeDamage(int damage)
     {
