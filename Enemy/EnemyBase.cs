@@ -1,4 +1,5 @@
-﻿using ConsoleGameFramework.Player;
+﻿using ConsoleGameFramework.Core;
+using ConsoleGameFramework.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,19 @@ public class EnemyBase : IDamageable
     public bool IsAlive => _hp > 0;
     private bool _isDead = false;
 
+    /// <summary>
+    /// 몬스터가 주는 경험치
+    /// </summary>
     public int Exp { get; protected set; } = 10;
+
+    /// <summary>
+    /// 몬스터가 드롭하는 아이템 : 아이템키, 드롭률
+    /// </summary>
+    public Dictionary<int, int> DropTable { get; protected set; } = new()
+    {
+        { 111,30 },
+        { 116,30 }
+    };
 
     /// <summary>
     /// 생성자 필드 : 이름,최대체력,공격력,방어력
@@ -60,6 +73,34 @@ public class EnemyBase : IDamageable
         _isDead = true;
         OnDied?.Invoke(Exp);
     }
+
+    /// <summary>
+    /// 랜덤 아이템 Key를 반환합니다. (드롭테이블에 존재하는 것만) / -1 : 아이템이 없는 경우 에러가 날 수 있으니 처리할 것
+    /// </summary>
+    /// <returns></returns>
+    public virtual int DropRandomItem()
+    {
+        int randomInt = GameManager.Instance.Context.Random.Next(0, 100);
+
+        int CurrentCount = 0;
+
+        foreach (var item in DropTable)
+        {
+                Console.WriteLine($"랜덤값 : {randomInt}   /   현재값 : {CurrentCount}");
+            if (item.Value + CurrentCount >= randomInt)
+            {                
+                Console.WriteLine($"{item.Value}");
+                return item.Key;
+            } 
+            else
+            {
+                CurrentCount = CurrentCount + item.Value;
+            }
+        }
+        return -1;
+
+    }
+
 
     /// <summary>
     /// 죽었을 때 이벤트 / 반환값 : 경험치, 랜덤아이템

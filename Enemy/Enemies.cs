@@ -16,6 +16,14 @@ public class Slime : EnemyBase
         Attack = 10;
         Defence = 8;
         Exp = 30;
+
+        DropTable = new()
+        {
+            { 111,10 },
+            { 116,10 },
+            { 001,5 },
+            { 005,5 }
+        };
     }
 
     public override string Image()
@@ -38,6 +46,13 @@ public class Wolf : EnemyBase
         Defence = 2;
         Exp = 40;
 
+        DropTable = new ()
+        {
+            { 111,10 },
+            { 116,10 },
+            { 001,5 },
+            { 005,5 }
+        };
     }
 
     public override string Image()
@@ -59,6 +74,13 @@ public class Goblin : EnemyBase
         Defence = 4;
         Exp = 50;
 
+        DropTable = new()
+        {
+            { 111,10 },
+            { 116,10 },
+            { 001,5 },
+            { 005,5 }
+        };
     }
     public override string Image()
     {

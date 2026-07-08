@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ConsoleGameProject.Enemy;
 using ConsoleGameFramework.Player;
 using ConsoleGameProject.Skill;
+using ConsoleGameProject.Item;
 
 namespace ConsoleGameProject.Scenes;
 
@@ -62,6 +63,7 @@ internal class BattleScene : SceneBase
 
         _infoString = "승리했습니다!!";
 
+        
         // 현재는 배틀이 끝나는 조건이 이겼을 때나, 게임오버 밖에 없기 때문에 여기서 구독해제함.
         Enemy.OnDied -= WinBattle;
     }
@@ -229,11 +231,28 @@ internal class BattleScene : SceneBase
 
         if (hasWin)
         {
+            // 아이템 드롭 처리
+            int drop = Enemy.DropRandomItem();
+
+            if (drop != -1)
+            {
+                string name = ItemData.Data[drop].Name;
+                if (Player.AddEquimentItem(drop))
+                {
+
+                }
+                else
+                {
+                    Player.AddConsumableItem(drop);
+                }
+                ConsoleUI.ReadString($"'{name}'을 얻었습니다.", "엔터를 눌러 계속");
+            }
+
             GoTo(context, SceneKey.Map);
         }
 
         if (_isPlayerTurn)
-        {            
+        {
             switch (menuHandler)
             {
                 // ---------------------------기본 메뉴---------------------------------------------------------
