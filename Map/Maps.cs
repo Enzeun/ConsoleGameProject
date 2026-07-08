@@ -8,38 +8,42 @@ namespace ConsoleGameProject.Map
 {
     public class GrassField : MapBase
     {
-        public GrassField() : base(001, "초원", 1)
+        public GrassField() : base(MapKey.GrassField, "초원", 1)
         {
-            NextMapId = 002;
+            NextMapKey = MapKey.Forest;
+            //NextMapId = 002;
         }
     }
     public class Forest : MapBase
     {
-        public Forest() : base(002, "숲", 3)
+        public Forest() : base(MapKey.Forest, "숲", 3)
         {
-            NextMapId = 003;
+            NextMapKey = MapKey.Cave;
+            //NextMapId = 003;
         }
     }
     public class Grave : MapBase
     {
-        public Grave() : base(003, "묘지", 6)
+        public Grave() : base(MapKey.Cave, "묘지", 6)
         {
-            NextMapId = 004;
+            NextMapKey = MapKey.Castle;
+            //NextMapId = 004;
         }
     }
 
     public class Castle : MapBase
     {
-        public Castle() : base(004, "마왕성", 9)
+        public Castle() : base(MapKey.Castle, "마왕성", 9)
         {
-            NextMapId = 999;
+            NextMapKey = MapKey.Dummy;
+            //NextMapId = 999;
         }
     }
     public class Dummy : MapBase
     {
-        public Dummy() : base(999, "이 곳은 없는 맵입니다", 999)
+        public Dummy() : base(MapKey.Dummy, "이 곳은 없는 맵입니다", 999)
         {
-            NextMapId = 999;
+            //NextMapId = 999;
         }
     }
 }
