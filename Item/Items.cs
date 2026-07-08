@@ -102,7 +102,7 @@ public class RotenArmor : Armor, IEquipable
 }
 public class IronArmor : Armor, IEquipable
 {
-    public IronArmor() : base(011, "철 갑옷")
+    public IronArmor() : base(013, "철 갑옷")
     {
         Defence = 20;
     }
@@ -110,7 +110,7 @@ public class IronArmor : Armor, IEquipable
 }
 public class ChainArmor : Armor, IEquipable
 {
-    public ChainArmor() : base(011, "체인 갑옷")
+    public ChainArmor() : base(014, "체인 갑옷")
     {
         Defence = 30;
     }

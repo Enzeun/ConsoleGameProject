@@ -122,8 +122,6 @@ public class GameManager
         ChangeScene(SceneKey.NewTitle);
 
 
-
-        // 디버깅 용 건너뛰기 코드
         Player = new Warrior();
         Player.Name = "현준";
         ChangeScene(SceneKey.BattleScene);

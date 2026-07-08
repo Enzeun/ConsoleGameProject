@@ -37,7 +37,7 @@ public abstract class Armor : ItemBase
     }
 }
 public abstract class UsableItem : ItemBase
-{    
+{
     public UsableItem(int id, string name) : base(id, name)
     {
 
@@ -47,17 +47,13 @@ public abstract class UsableItem : ItemBase
 }
 
 /// <summary>
-/// 아이템 데이터베이스 싱글톤
+/// 아이템 데이터베이스 
 /// </summary>
-public class ItemData
+public static class ItemData
 {
-    public static ItemData Instance { get; } = new ItemData();
+    //public static ItemData Instance { get; } = new ItemData();
 
-    public static Dictionary<int, ItemBase> Data { get; private set; }
-
-    public ItemData()
-    {
-        Data = new()
+    public static readonly Dictionary<int, ItemBase> Data = new()
         {
             {001, new RustedSword()},
             {002, new Sword()},
@@ -69,12 +65,11 @@ public class ItemData
             {008, new GreatStaff()},
             {011, new GrassArmor()},
             {012, new RotenArmor()},
-            {011, new IronArmor()},
-            {011, new ChainArmor()},
+            {013, new IronArmor()},
+            {014, new ChainArmor()},
             {111,new HpPotion() },
             {112,new MpPotion()  },
-
-
+            {999,new BossTicket()  },
         };
-    }
+
 }

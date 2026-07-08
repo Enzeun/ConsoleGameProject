@@ -21,7 +21,20 @@ public class Warrior : PlayerBase
             new HeavyAttack(this),
             new FinalAttack(this),
         };
+        // 기본무기 추가
+        AddEquimentItem(001);
 
+        // 기본방어구 추가
+        AddEquimentItem(011);
+
+        // 기본 아이템 추가 (HP 포션 2개, Mp 포션 1개)
+        AddConsumableItem(111);
+        AddConsumableItem(111);
+        AddConsumableItem(112);
+
+        // 기본장비 장착
+        EquipWeapon(001);
+        EquipArmor(011);
     }
     public override void TakeDamage(int damage)
     {
@@ -50,7 +63,23 @@ public class Mage : PlayerBase
             new Explosion(this),
             new Heal(this),
         };
+                
 
+
+        // 기본무기 추가
+        AddEquimentItem(001);
+
+        // 기본방어구 추가
+        AddEquimentItem(011);
+
+        // 기본 아이템 추가 (HP 포션 2개, Mp 포션 1개)
+        AddConsumableItem(111);
+        AddConsumableItem(111);
+        AddConsumableItem(112);
+
+        // 기본장비 장착
+        EquipWeapon(001);
+        EquipArmor(011);
     }
     public override void TakeDamage(int damage)
     {

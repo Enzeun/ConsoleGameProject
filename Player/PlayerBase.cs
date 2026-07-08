@@ -60,17 +60,19 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
 
         VitalStats = new VitalStats(maxHp, maxMp);
         CombatStats = new CombatStats(attack, defence);
+
+
     }
 
     /// <summary>
     /// 최종 공격력 (기본 공격력 + 장비 공격력)
     /// </summary>
-    public int FinalAttack => CombatStats.BaseAttack;
+    public int FinalAttack => CombatStats.BaseAttack + EquippedWeapon.Attack;
 
     /// <summary>
     /// 최종 방어력 (기본 방어력 + 장비 방어력)
     /// </summary>
-    public int FinalDefence => CombatStats.BaseDefence;
+    public int FinalDefence => CombatStats.BaseDefence + EquippedArmor.Defence;
 
     /// <summary>
     /// 데미지 계산
@@ -197,12 +199,31 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
 
     //--------------------장비 인벤토리---------------------------------------------------------------------------
 
-    public List<ItemBase> EquipmentInventory { get; protected set; }
+    public List<ItemBase> EquipmentInventory { get; protected set; } = new List<ItemBase>();
 
-    public bool AddEquimentItem(ItemBase item)
+    public Weapon EquippedWeapon;
+    public Armor EquippedArmor;
+
+    public bool AddEquimentItem(int itemId = 001)
     {
+        // 데이터에 없는 아이템이면 false
+        if (!ItemData.Data.ContainsKey(itemId))
+        {
+            GameManager.Instance.Context.AddLog("없는 아이템입니다");
+            return false;
+        }
+
+        ItemBase item = ItemData.Data[itemId];
+
+        if (ItemData.Data.ContainsKey(itemId))
+            return false;
+
+        if (!(item is IEquipable))
+            return false;
+
         if (EquipmentInventory.Contains(item))
             return false;
+
         else
         {
             EquipmentInventory.Add(item);
@@ -210,21 +231,94 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
         }
     }
 
+    public void EquipWeapon(int itemId)
+    {
+        // 데이터에 없는 아이템이면 return
+        if (!ItemData.Data.ContainsKey(itemId))
+        {
+            GameManager.Instance.Context.AddLog("없는 아이템입니다");
+            return;
+        }
+
+        ItemBase item = ItemData.Data[itemId];
+
+        if (!(item is IEquipable))
+            return;
+
+        EquippedWeapon = (Weapon)item;
+    }
+    public void EquipArmor(int itemId)
+    {
+        // 데이터에 없는 아이템이면 return
+        if (!ItemData.Data.ContainsKey(itemId))
+        {
+            GameManager.Instance.Context.AddLog("없는 아이템입니다");
+            return;
+        }
+
+        ItemBase item = ItemData.Data[itemId];
+
+        if (!(item is IEquipable))
+            return;
+
+        EquippedArmor = (Armor)item;
+    }
+
+
+
+
     //--------------------아이템 인벤토리---------------------------------------------------------------------------
     /// <summary>
     /// 소비아이템 Dic<아이템id, 갯수>
     /// </summary>
-    public Dictionary<int, int> ConsumableInventory { get; protected set; }
+    public Dictionary<int, int> ConsumableInventory { get; protected set; } = new Dictionary<int, int>();
 
-    public void AddConsumableItem(ItemBase item)
+    /// <summary>
+    /// 소비아이템 얻기
+    /// </summary>
+    /// <param name="itemId"></param>
+    public void AddConsumableItem(int itemId = 111)
     {
-        if (ConsumableInventory.ContainsKey(item.Id))
+        // 데이터에 없는 아이템이면 return
+        if (!ItemData.Data.ContainsKey(itemId))
         {
-            ConsumableInventory[item.Id] += 1;
+            GameManager.Instance.Context.AddLog("없는 아이템입니다");
+            return;
         }
 
-        ConsumableInventory.Add(item.Id, 1);
+        ItemBase item = ItemData.Data[itemId];
+
+        if (!(item is IConsumable))
+            return;
+
+        if (ConsumableInventory.ContainsKey(itemId))
+        {
+            ConsumableInventory[itemId] += 1;
+        }
+        else
+            ConsumableInventory.Add(itemId, 1);
     }
 
+    /// <summary>
+    /// 소비아이템 사용(잃기)
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <returns></returns>
+    public bool RemoveConsumableItem(int itemId = 111)
+    {
+        ItemBase item = ItemData.Data[itemId];
+
+        if (!(item is IConsumable))
+            return false;
+
+        if (ConsumableInventory.ContainsKey(itemId))
+        {
+            if (ConsumableInventory[itemId] <= 0)
+                return false;
+            ConsumableInventory[itemId] -= 1;
+            return true;
+        }
+        return false;
+    }
 
 }
