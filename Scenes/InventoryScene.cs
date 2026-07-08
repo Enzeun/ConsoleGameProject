@@ -63,10 +63,12 @@ public class InventoryScene : SceneBase
             int itemcount = Player.ConsumableInventory[key];
 
             string itemName = ItemData.Data[key].Name;
+            
+            string itemDesc = ItemData.Data[key].Description;
 
             bool canUse = Player.ConsumableInventory[key] > 0;
 
-            MenuOption menuOption = new MenuOption(count, $"{itemName}", $"{itemcount} 개 보유 중", canUse);
+            MenuOption menuOption = new MenuOption(count, $"{itemName} X {itemcount} 개", $"{itemDesc}", canUse);
 
             Menu.Add(menuOption);
 

@@ -11,6 +11,7 @@ public abstract class ItemBase
 {
     public readonly int Id;
     public readonly string? Name;
+    public string Description { get; protected set; } = "설명이 비어있습니다";
 
     public ItemBase(int id, string name)
     {

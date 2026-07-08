@@ -129,7 +129,7 @@ public class SmallHpPotion : UsableItem, IConsumable
     public int RecoverAmount { get; private set; } = 100;
     public SmallHpPotion() : base(111, "작은 HP 포션")
     {
-
+        Description = $"체력을 {RecoverAmount}만큼 회복합니다";
     }
     public override void Use(PlayerBase player)
     {
@@ -141,7 +141,7 @@ public class HpPotion : UsableItem, IConsumable
     public int RecoverAmount { get; private set; } = 200;
     public HpPotion() : base(112, "중간 HP 포션")
     {
-
+        Description = $"체력을 {RecoverAmount}만큼 회복합니다";
     }
     public override void Use(PlayerBase player)
     {
@@ -153,7 +153,7 @@ public class BigHpPotion : UsableItem, IConsumable
     public int RecoverAmount { get; private set; } = 300;
     public BigHpPotion() : base(113, "큰 HP 포션")
     {
-
+        Description = $"체력을 {RecoverAmount}만큼 회복합니다";
     }
     public override void Use(PlayerBase player)
     {
@@ -167,7 +167,7 @@ public class SmallMpPotion : UsableItem, IConsumable
 
     public SmallMpPotion() : base(116, "작은 MP 포션")
     {
-
+        Description = $"마나를 {RecoverAmount}만큼 회복합니다";
     }
     public override void Use(PlayerBase player)
     {
@@ -180,7 +180,7 @@ public class MpPotion : UsableItem, IConsumable
 
     public MpPotion() : base(117, "중간 MP 포션")
     {
-
+        Description = $"마나를 {RecoverAmount}만큼 회복합니다";
     }
     public override void Use(PlayerBase player)
     {
@@ -193,7 +193,7 @@ public class BigMpPotion : UsableItem, IConsumable
 
     public BigMpPotion() : base(118, "큰 MP 포션")
     {
-
+        Description = $"마나를 {RecoverAmount}만큼 회복합니다";
     }
     public override void Use(PlayerBase player)
     {
@@ -210,7 +210,7 @@ public class BossTicket : UsableItem
 {
     public BossTicket() : base(999, "보스 티켓")
     {
-
+        Description = $"마왕에게 도전하기 위한 티켓입니다";
     }
     public override void Use(PlayerBase player)
     {
