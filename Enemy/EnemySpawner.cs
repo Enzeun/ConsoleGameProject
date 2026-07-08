@@ -1,4 +1,5 @@
-﻿using ConsoleGameProject.Map;
+﻿using ConsoleGameFramework.Core;
+using ConsoleGameProject.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,4 +49,15 @@ public class EnemySpawner
 
         };
     }
+
+    public Type SpawnEnemy()
+    {
+        MapKey currentMap = GameManager.Instance.CurrentMap.Key;
+
+        int randomInt = GameManager.Instance.Context.Random.Next(0, EnemiesInMap[currentMap].Count);
+
+        return (EnemiesInMap[currentMap][randomInt]);
+    }
+
+
 }
