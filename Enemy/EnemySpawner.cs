@@ -16,7 +16,7 @@ public class EnemySpawner
     public static EnemySpawner Instance {  get; } = new EnemySpawner();
 
     // 각 맵의 몬스터 타입을 저장하는 Dictionary
-    public static Dictionary<MapKey,List<Type>> EnemysInMap = new Dictionary<MapKey, List<Type>>(5);
+    public readonly Dictionary<MapKey,List<Type>> EnemiesInMap = new Dictionary<MapKey, List<Type>>(5);
 
     private EnemySpawner()
     {
@@ -25,25 +25,27 @@ public class EnemySpawner
 
     private void RegisterMonsters()
     {
-        EnemysInMap[MapKey.GrassField] = new List<Type>()
+        EnemiesInMap[MapKey.GrassField] = new List<Type>()
         {
             typeof(Slime),
             typeof(Wolf),
             typeof(Goblin),
         };
-        EnemysInMap[MapKey.Forest] = new List<Type>()
+        EnemiesInMap[MapKey.Forest] = new List<Type>()
         {
 
         };
-        EnemysInMap[MapKey.Cave] = new List<Type>()
+        EnemiesInMap[MapKey.Cave] = new List<Type>()
         {
 
         };
-        EnemysInMap[MapKey.Castle] = new List<Type>()
+        EnemiesInMap[MapKey.Castle] = new List<Type>()
+        {
+
+        };
+        EnemiesInMap[MapKey.Dummy] = new List<Type>()
         {
 
         };
     }
-
-
 }
