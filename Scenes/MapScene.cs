@@ -90,7 +90,7 @@ public class MapScene : SceneBase
         }
         else
         {
-            ConsoleUI.WriteStatusBar("EXP", 999, 999, 24, ConsoleColor.DarkYellow);
+            ConsoleUI.WriteStatusBar("EXP", 999999, 999999, 24, ConsoleColor.DarkYellow);
         }
 
 
@@ -112,7 +112,6 @@ public class MapScene : SceneBase
         new MenuOption(3, "인벤토리 확인."),
         new MenuOption(4, "플레이어 상태 확인."),
                 
-
         //new MenuOption(9, "레벨업."), // 디버깅용
         //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다.")

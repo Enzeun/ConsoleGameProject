@@ -120,7 +120,7 @@ internal class BattleScene : SceneBase
         }
         else
         {
-            ConsoleUI.WriteStatusBar("EXP", 999, 999, 24, ConsoleColor.DarkYellow);
+            ConsoleUI.WriteStatusBar("EXP", 999999, 999999, 24, ConsoleColor.DarkYellow);
         }
 
 
