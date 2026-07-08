@@ -237,15 +237,23 @@ internal class BattleScene : SceneBase
             if (drop != -1)
             {
                 string name = ItemData.Data[drop].Name;
-                if (Player.AddEquimentItem(drop))
+                switch (Player.AddEquimentItem(drop))
                 {
-
-                }
-                else
-                {
-                    Player.AddConsumableItem(drop);
-                }
-                ConsoleUI.ReadString($"'{name}'을 얻었습니다.", "엔터를 눌러 계속");
+                    case 1:
+                        ConsoleUI.ReadString($"'{name}'을 얻었습니다.", "엔터를 눌러 계속");
+                        break;
+                    case -1:
+                        ConsoleUI.WriteToast("없는 아이템입니다. 코딩이 잘못됐습니다", ToastType.Error);
+                        break;
+                    case -2:
+                        ConsoleUI.WriteToast("이미 있는 아이템입니다. 작은 HP 포션으로 전환합니다", ToastType.Info);
+                        Player.AddConsumableItem(111);
+                        break;
+                    case -3:
+                        Player.AddConsumableItem(drop);
+                        ConsoleUI.ReadString($"'{name}'을 얻었습니다.", "엔터를 눌러 계속");
+                        break;
+                }               
             }
 
             GoTo(context, SceneKey.Map);

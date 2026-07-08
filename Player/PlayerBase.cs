@@ -204,30 +204,38 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
     public Weapon EquippedWeapon;
     public Armor EquippedArmor;
 
-    public bool AddEquimentItem(int itemId = 001)
+    /// <summary>
+    /// 장비를 얻는 함수 /
+    /// -1: 없는 아이템  /
+    /// -2: 이미 있는 아이템  /
+    /// -3: 장비아이템이 아님 / 
+    /// 1: 정상 등록 
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <returns></returns>
+    public int AddEquimentItem(int itemId = 001)
     {
         // 데이터에 없는 아이템이면 false
         if (!ItemData.Data.ContainsKey(itemId))
         {
             GameManager.Instance.Context.AddLog("없는 아이템입니다");
-            return false;
+            return -1;
         }
 
         ItemBase item = ItemData.Data[itemId];
 
-        if (ItemData.Data.ContainsKey(itemId))
-            return false;
-
-        if (!(item is IEquipable))
-            return false;
-
+        // 이미 가지고 있으면 false
         if (EquipmentInventory.Contains(item))
-            return false;
+            return -2;
+        
+        // 장비가 아님
+        if (!(item is IEquipable))
+            return -3;
 
         else
         {
             EquipmentInventory.Add(item);
-            return true;
+            return 1;
         }
     }
 
