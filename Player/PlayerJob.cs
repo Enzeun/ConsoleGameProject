@@ -30,7 +30,7 @@ public class Warrior : PlayerBase
         // 기본 아이템 추가 (HP 포션 2개, Mp 포션 1개)
         AddConsumableItem(111);
         AddConsumableItem(111);
-        AddConsumableItem(112);
+        AddConsumableItem(116);
 
         // 기본장비 장착
         EquipWeapon(001);
@@ -75,7 +75,7 @@ public class Mage : PlayerBase
         // 기본 아이템 추가 (HP 포션 2개, Mp 포션 1개)
         AddConsumableItem(111);
         AddConsumableItem(111);
-        AddConsumableItem(112);
+        AddConsumableItem(116);
 
         // 기본장비 장착
         EquipWeapon(001);
@@ -93,4 +93,3 @@ public class Mage : PlayerBase
         base.LevelUp();
     }
 }
-

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameFramework.Player;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -123,27 +124,80 @@ public class ChainArmor : Armor, IEquipable
 
 //---------------------포션--------------------------------------------------------------
 
-public class HpPotion : UsableItem, IConsumable
+public class SmallHpPotion : UsableItem, IConsumable
 {
-    public HpPotion() : base(111, "HP 포션")
+    public int RecoverAmount { get; private set; } = 100;
+    public SmallHpPotion() : base(111, "작은 HP 포션")
     {
 
     }
-    public override void Use()
+    public override void Use(PlayerBase player)
+    {
+        player.RecoveryHp(RecoverAmount);
+    }
+}
+public class HpPotion : UsableItem, IConsumable
+{
+    public int RecoverAmount { get; private set; } = 200;
+    public HpPotion() : base(112, "중간 HP 포션")
     {
 
+    }
+    public override void Use(PlayerBase player)
+    {
+        player.RecoveryHp(RecoverAmount);
+    }
+}
+public class BigHpPotion : UsableItem, IConsumable
+{
+    public int RecoverAmount { get; private set; } = 300;
+    public BigHpPotion() : base(113, "큰 HP 포션")
+    {
+
+    }
+    public override void Use(PlayerBase player)
+    {
+        player.RecoveryHp(RecoverAmount);
     }
 }
 
-public class MpPotion : UsableItem, IConsumable
+public class SmallMpPotion : UsableItem, IConsumable
 {
-    public MpPotion() : base(112, "MP 포션")
+    public int RecoverAmount { get; private set; } = 100;
+
+    public SmallMpPotion() : base(116, "작은 MP 포션")
     {
 
     }
-    public override void Use()
+    public override void Use(PlayerBase player)
+    {
+        player.RecoveryMp(RecoverAmount);
+    }
+}
+public class MpPotion : UsableItem, IConsumable
+{
+    public int RecoverAmount { get; private set; } = 200;
+
+    public MpPotion() : base(117, "중간 MP 포션")
     {
 
+    }
+    public override void Use(PlayerBase player)
+    {
+        player.RecoveryMp(RecoverAmount);
+    }
+}
+public class BigMpPotion : UsableItem, IConsumable
+{
+    public int RecoverAmount { get; private set; } = 300;
+
+    public BigMpPotion() : base(118, "큰 MP 포션")
+    {
+
+    }
+    public override void Use(PlayerBase player)
+    {
+        player.RecoveryMp(RecoverAmount);
     }
 }
 
@@ -158,7 +212,7 @@ public class BossTicket : UsableItem
     {
 
     }
-    public override void Use()
+    public override void Use(PlayerBase player)
     {
 
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameFramework.Player;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ public abstract class UsableItem : ItemBase
 
     }
 
-    public abstract void Use();
+    public abstract void Use(PlayerBase player);
 }
 
 /// <summary>
@@ -67,8 +68,12 @@ public static class ItemData
             {012, new RotenArmor()},
             {013, new IronArmor()},
             {014, new ChainArmor()},
-            {111,new HpPotion() },
-            {112,new MpPotion()  },
+            {111,new SmallHpPotion() },
+            {112,new HpPotion() },
+            {113,new BigHpPotion() },
+            {116,new SmallMpPotion()  },
+            {117,new MpPotion()  },
+            {118,new BigMpPotion()  },
             {999,new BossTicket()  },
         };
 

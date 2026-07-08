@@ -106,6 +106,7 @@ public class GameManager
         AddScene(new ScenePractice());
         AddScene(new MapScene());
         AddScene(new BattleScene());
+        AddScene(new InventoryScene());
     }
 
     private void AddScene(IScene scene)
@@ -124,7 +125,7 @@ public class GameManager
 
         Player = new Warrior();
         Player.Name = "현준";
-        ChangeScene(SceneKey.BattleScene);
+        ChangeScene(SceneKey.Map);
         // 디버깅 용 건너뛰기 코드
 
         

@@ -304,9 +304,9 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
     /// </summary>
     /// <param name="itemId"></param>
     /// <returns></returns>
-    public bool RemoveConsumableItem(int itemId = 111)
+    public bool UseConsumableItem(int itemId = 111)
     {
-        ItemBase item = ItemData.Data[itemId];
+        UsableItem item = (UsableItem)ItemData.Data[itemId];
 
         if (!(item is IConsumable))
             return false;
@@ -315,6 +315,8 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
         {
             if (ConsumableInventory[itemId] <= 0)
                 return false;
+
+            item.Use(this);
             ConsumableInventory[itemId] -= 1;
             return true;
         }

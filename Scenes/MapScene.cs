@@ -110,7 +110,8 @@ public class MapScene : SceneBase
         new MenuOption(1, "주변을 둘러본다.", "몬스터와 조우합니다."),
         new MenuOption(2, "다음 맵으로."),
         new MenuOption(3, "인벤토리 확인."),
-        new MenuOption(4, "플레이어 상태 확인."),
+        new MenuOption(4, "장비 확인."),
+        new MenuOption(5, "플레이어 상태 확인."),
                 
         //new MenuOption(9, "레벨업."), // 디버깅용
         //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
@@ -138,8 +139,9 @@ public class MapScene : SceneBase
                 break;
 
             case 3:
+                GoTo(context, SceneKey.InventoryScene);
 
-                GameManager.Instance.Player.GainExp(100);
+                //GameManager.Instance.Player.GainExp(100);
                 //GoTo(context, SceneKey.Map);
                 break;
 
