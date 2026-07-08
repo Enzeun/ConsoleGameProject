@@ -8,14 +8,17 @@ namespace ConsoleGameProject.Map
 {
     public abstract class MapBase
     {
-        public readonly int Id;
+        public readonly MapKey Key;
+        //public readonly int Id;
         public readonly string? Name;
         public readonly int EnterLevel;
-        public int NextMapId {  get; protected set; }
+        //public int NextMapId {  get; protected set; }
+        public MapKey NextMapKey {  get; protected set; }
 
-        public MapBase(int id, string name, int enterLever)
+        public MapBase(MapKey key, string name, int enterLever)
         {
-            Id = id;
+            Key = key;
+            //Id = id;
             Name = name;
             EnterLevel = enterLever;
 

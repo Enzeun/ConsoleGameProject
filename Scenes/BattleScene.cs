@@ -29,11 +29,17 @@ internal class BattleScene : SceneBase
 
     public override void Enter(GameContext context)
     {
+        // 플레이어 객체 등록
         Player = GameManager.Instance.Player;
-        context.AddLog("배틀화면 진입");
-        context.Random.Next(0, 3);
+
+        // 디버깅
+        //context.AddLog("배틀화면 진입");    
+
         // 랜덤 적 생성
-        Enemy = new EnemyBase("슬라임", 100);
+        Enemy = EnemySpawner.Instance.SpawnRandomEnemy();
+        
+        //Enemy = new Slime(); // 디버깅용 더미 데이터
+
         // 죽으면 이벤트 구독
         Enemy.OnDied += WinBattle;
         menuHandler = 1; // 초기화
@@ -60,24 +66,25 @@ internal class BattleScene : SceneBase
         // ---------------------------타이틀 끝나는 곳---------------------------------------------------------
 
         // ---------------------------몬스터 정보---------------------------------------------------------
-        ConsoleUI.Write("                              ");
-        ConsoleUI.WriteLine("  .----.");
-        ConsoleUI.Write("                              ");
-        if (Enemy.IsAlive)
-        {
-            ConsoleUI.WriteLine("  (O  O)");
-        }
-        else
-            ConsoleUI.WriteLine("  (X  X)");
-        ConsoleUI.Write("                              ");
-        ConsoleUI.WriteLine("  / ()  |");
-        ConsoleUI.Write("                              ");
-        ConsoleUI.WriteLine(" /   /|  |");
-        ConsoleUI.Write("                              ");
-        ConsoleUI.WriteLine("|___| |___|");
+        //ConsoleUI.Write("                              ");
+        //ConsoleUI.WriteLine("  .----.");
+        //ConsoleUI.Write("                              ");
+        //if (Enemy.IsAlive)
+        //{
+        //    ConsoleUI.WriteLine("  (O  O)");
+        //}
+        //else
+        //    ConsoleUI.WriteLine("  (X  X)");
+        //ConsoleUI.Write("                              ");
+        //ConsoleUI.WriteLine("  / ()  |");
+        //ConsoleUI.Write("                              ");
+        //ConsoleUI.WriteLine(" /   /|  |");
+        //ConsoleUI.Write("                              ");
+        //ConsoleUI.WriteLine("|___| |___|");
 
+
+        ConsoleUI.WriteLine($"{Enemy.Image()}");
         ConsoleUI.WriteLine();
-
 
         // 몬스터 이름 : HP 바
         ConsoleUI.WriteStatusBar($"{Enemy.Name}", Enemy.CurrentHp, Enemy.MaxHp, 24, ConsoleColor.DarkRed);
@@ -89,10 +96,10 @@ internal class BattleScene : SceneBase
         // ---------------------------플레이어 정보---------------------------------------------------------
         
 
-        ConsoleUI.WriteLine("  .----. ");
-        ConsoleUI.WriteLine("  |   -| ");
-        ConsoleUI.WriteLine("  '----'  ");
-        ConsoleUI.WriteLine("  /   |  ");
+        ConsoleUI.WriteLine("            .----. ");
+        ConsoleUI.WriteLine("            |   -| ");
+        ConsoleUI.WriteLine("            '----'  ");
+        ConsoleUI.WriteLine("            /   |  ");
 
 
         // ---------------------------플레이어 정보---------------------------------------------------------

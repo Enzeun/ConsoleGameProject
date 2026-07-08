@@ -23,7 +23,7 @@ public class GameManager
 {
     // ----------------------------------------------------------------------------------------------
     // 맵 정보 등록
-    public readonly Dictionary<int, MapBase> Maps = new Dictionary<int, MapBase>();
+    public readonly Dictionary<MapKey, MapBase> Maps = new Dictionary<MapKey, MapBase>();
     public MapBase CurrentMap { get; private set; }
 
     private void RegisterMaps()
@@ -34,20 +34,20 @@ public class GameManager
         AddMaps(new Castle());
         AddMaps(new Dummy());
 
-        CurrentMap = Maps[1];
+        CurrentMap = Maps[MapKey.GrassField];
     }
     private void AddMaps(MapBase map)
     {
-        Maps[map.Id] = map;
+        Maps[map.Key] = map;
     }
-    public void ChangeMap(int id)
+    public void ChangeMap(MapKey key)
     {
-        if (Maps.TryGetValue(id, out MapBase? map))
+        if (Maps.TryGetValue(key, out MapBase? map))
             CurrentMap = map;
         else // 예외 발생 시 더미 맵으로 덮어쓰기
         {
             Context.AddLog("해당 맵은 없는 맵입니다.");
-            CurrentMap = Maps[999];
+            CurrentMap = Maps[MapKey.Dummy];
         }
         ConsoleUI.WriteLog(Context.Logs);
     }

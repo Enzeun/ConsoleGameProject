@@ -44,7 +44,7 @@ public class PopUpNaxtMapScene:SceneBase
         switch (choice)
         {
             case 1:
-                GameManager.Instance.ChangeMap(GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId].Id);
+                GameManager.Instance.ChangeMap(GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapKey].Key);
                 GoTo(context, SceneKey.Map);
                 break;
 

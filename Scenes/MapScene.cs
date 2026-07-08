@@ -21,7 +21,7 @@ public class MapScene : SceneBase
     public override void Enter(GameContext context)
     {
         CurrentMap = GameManager.Instance.CurrentMap;
-        NextMap = GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapId];
+        NextMap = GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapKey];
         context.AddLog("맵 화면 입니다.");
 
 
@@ -33,7 +33,7 @@ public class MapScene : SceneBase
             (GameManager.Instance.Player.Level >= NextMap.EnterLevel)
         );
 
-        if (CurrentMap.GetType() == typeof(Castle))
+        if (CurrentMap.Key == MapKey.Castle)
         {
 
             isLastMap = true;
@@ -112,7 +112,7 @@ public class MapScene : SceneBase
             case 2:
                 if (ConsoleUI.Confirm("정말 이동 하시겠습니까? *이동 한 후에는 다시 되돌아갈 수 없습니다."))
                 {
-                    GameManager.Instance.ChangeMap(NextMap.Id);
+                    GameManager.Instance.ChangeMap(NextMap.Key);
                     GoTo(context, SceneKey.Map);
                 }
                 context.AddLog("마지막 맵입니다"); // 디버깅
