@@ -101,6 +101,8 @@ public abstract class PlayerBase : IDamageable
     {
         _isDead = true;
         OnDied?.Invoke();
+
+        GameManager.Instance.RequestQuit();
     }
 
     /// <summary>
