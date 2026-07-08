@@ -24,6 +24,8 @@ public class SkillBase
 
     public virtual void UseSkill(IDamageable target)
     {
+        Caster.UseMp(ConsumeMp);
+
         int finalDamage = Caster.FinalAttack * DamageMultiplier + AddDamage;
 
         target.TakeDamage(finalDamage);

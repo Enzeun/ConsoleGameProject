@@ -150,11 +150,24 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
         OnLevelUp?.Invoke();
     }
 
-    public virtual void Heal(int amount)
+    /// <summary>
+    /// 플레이어 체력 회복
+    /// </summary>
+    /// <param name="amount"></param>
+    public virtual void RecoveryHp(int amount)
     {
         VitalStats.ChangeHp(amount);
     }
 
+    public virtual void UseMp(int amount)
+    {
+        VitalStats.ChangeMp(-amount);
+    }
+
+    public virtual void RecoveryMp(int amount)
+    {
+        VitalStats.ChangeMp(amount);
+    }
 
     // 플레이어 죽음
     public event Action? OnDied;

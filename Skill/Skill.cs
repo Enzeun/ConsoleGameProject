@@ -70,7 +70,7 @@ public class Heal : SkillBase
     
     public override void UseSkill(IDamageable target)
     {        
-        Caster.Heal(healamount);
+        Caster.RecoveryHp(healamount);
     }
 }
 

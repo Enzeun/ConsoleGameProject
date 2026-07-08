@@ -8,5 +8,4 @@ namespace ConsoleGameProject.Skill;
 
 public interface ISkillCaster
 {
-    void UseSkill();
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleGameProject.Enemy;
 using ConsoleGameFramework.Player;
+using ConsoleGameProject.Skill;
 
 namespace ConsoleGameProject.Scenes;
 
@@ -35,6 +36,9 @@ internal class BattleScene : SceneBase
 
         // 플레이어 객체 등록
         Player = GameManager.Instance.Player;
+
+        // 플레이어 스킬 숫자 만큼 스킬메뉴 추가
+        InitializeSkillMenu();
 
         // 디버깅
         //context.AddLog("배틀화면 진입");    
@@ -143,11 +147,30 @@ internal class BattleScene : SceneBase
     private static readonly List<MenuOption> SkillMenu = new List<MenuOption>
     {
         //new MenuOption(1, "1번스킬"),
-        //new MenuOption(2, "2번스킬"),
-        
-        new MenuOption(0, "취소"),
-
+        //new MenuOption(2, "2번스킬"),        
+        //new MenuOption(0, "취소"),
     };
+
+    /// <summary>
+    /// 스킬메뉴를 초기화 (플레이어가 가진 스킬들로 메뉴 구성)
+    /// </summary>
+    private void InitializeSkillMenu()
+    {
+        SkillMenu.Clear();
+        for (int i = 0; i < Player.SkillList.Count; i++)
+        {
+            if (i > 4) // 스킬은 최대 4개 까지만 허용
+                return;
+
+            MenuOption menuOption = new MenuOption(i + 1, Player.SkillList[i].Name, Player.SkillList[i].Description);
+
+            if (SkillMenu.Contains(menuOption))
+                continue;
+
+            SkillMenu.Add(menuOption);
+        }
+        SkillMenu.Add(new MenuOption(0, "취소"));
+    }
 
     //인벤토리 메뉴
     private static readonly List<MenuOption> InventoryMenu = new List<MenuOption>
@@ -164,12 +187,13 @@ internal class BattleScene : SceneBase
     private void NextTurn()
     {
         _isPlayerTurn = !_isPlayerTurn;
+        ConsoleUI.WriteMenu(Menu, "행동 선택");
 
     }
 
     private void PlayerAttack()
     {
-        _infoString = "플레이어가 공격합니다!";
+        _infoString = "플레이어가 공격!";
 
         Enemy.TakeDamage(Player.FinalAttack);
 
@@ -178,19 +202,30 @@ internal class BattleScene : SceneBase
 
     private void EnemyAttack()
     {
-        _infoString = "적이 공격합니다!";
+        _infoString = "적이 공격했다!";
 
         Player.TakeDamage(Enemy.Attack);
 
         NextTurn();
     }
 
+    private void PlayerUseSkill(int num)
+    {
+        int index = num - 1;
+        _infoString = $"{Player.SkillList[index].Name} 스킬을 사용!";
+
+        Player.SkillList[index].UseSkill(Enemy);
+
+        NextTurn();
+
+    }
+
+
     public override void HandleInput(GameContext context)
     {
         ConsoleUI.WriteRule();
         ConsoleUI.WriteCentered(_infoString);
         ConsoleUI.WriteRule();
-        Thread.Sleep(500);
 
         if (hasWin)
         {
@@ -198,10 +233,9 @@ internal class BattleScene : SceneBase
         }
 
         if (_isPlayerTurn)
-        {
+        {            
             switch (menuHandler)
             {
-
                 // ---------------------------기본 메뉴---------------------------------------------------------
                 case 1:
                     ConsoleUI.WriteMenu(Menu, "행동 선택");
@@ -232,18 +266,36 @@ internal class BattleScene : SceneBase
 
                     switch (choice)
                     {
-                        case 0: // 취소                    
-                            context.AddLog("스킬창 -> 선택메뉴"); // 디버깅
+                        case 1: // 1번 스킬                            
+                            context.AddLog("1번 스킬을 사용합니다"); // 디버깅
+                            PlayerUseSkill(1);
                             menuHandler = 1;
                             break;
+                        case 2: // 2번 스킬                    
+                            context.AddLog("2번 스킬을 사용합니다"); // 디버깅
+                            PlayerUseSkill(2);
+                            menuHandler = 1;
+                            break;
+                        case 3: // 3번 스킬                    
+                            context.AddLog("3번 스킬을 사용합니다"); // 디버깅
+                            PlayerUseSkill(3);
+                            menuHandler = 1;
+                            break;
+                        case 4: // 4번 스킬                    
+                            context.AddLog("4번 스킬을 사용합니다"); // 디버깅
+                            PlayerUseSkill(4);
+                            menuHandler = 1;
+                            break;
+
+
                         case 0: // 취소                    
                             context.AddLog("스킬창 -> 선택메뉴"); // 디버깅
                             menuHandler = 1;
                             break;
                     }
 
-                    break;
 
+                    break;
 
 
 
@@ -266,6 +318,8 @@ internal class BattleScene : SceneBase
         }
         else if (!_isPlayerTurn)
         {
+            Thread.Sleep(1000);
+
             if (!Enemy.IsAlive)
             {
                 NextTurn();
