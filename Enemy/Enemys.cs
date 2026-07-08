@@ -11,9 +11,11 @@ namespace ConsoleGameProject.Enemy;
 
 public class Slime : EnemyBase
 {
-    public Slime() : base("슬라임", 50,10,8)
+    public Slime() : base("슬라임", 50)
     {
-
+        Attack = 10;
+        Defence = 8;
+        Exp = 20;
     }
 
     public override string Image()
@@ -29,8 +31,11 @@ public class Slime : EnemyBase
 }
 public class Wolf : EnemyBase
 {
-    public Wolf() : base("늑대", 70,20,2)
+    public Wolf() : base("늑대", 70)
     {
+        Attack = 20;
+        Defence = 2;
+        Exp = 30;
 
     }
 
@@ -47,8 +52,11 @@ public class Wolf : EnemyBase
 
 public class Goblin : EnemyBase
 {
-    public Goblin() : base("고블린", 100,15,4)
+    public Goblin() : base("고블린", 100)
     {
+        Attack = 15;
+        Defence = 4;
+        Exp = 40;
 
     }
     public override string Image()

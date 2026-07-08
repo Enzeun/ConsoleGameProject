@@ -22,6 +22,8 @@ public class EnemyBase : IDamageable
     public bool IsAlive => _hp > 0;
     private bool _isDead = false;
 
+    public int Exp { get; protected set; } = 10;
+
     /// <summary>
     /// 생성자 필드 : 이름,최대체력,공격력,방어력
     /// </summary>
@@ -29,12 +31,10 @@ public class EnemyBase : IDamageable
     /// <param name="maxHp">최대체력</param>
     /// <param name="attakc">공격력</param>
     /// <param name="defence">방어력</param>
-    public EnemyBase(string name, int maxHp,int attakc, int defence)
+    public EnemyBase(string name, int maxHp)
     {
         MaxHp = maxHp;
         CurrentHp = MaxHp;
-        Attack = attakc;
-        Defence = defence;
 
     }
 

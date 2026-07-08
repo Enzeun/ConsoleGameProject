@@ -36,10 +36,10 @@ internal class BattleScene : SceneBase
         //context.AddLog("배틀화면 진입");    
 
         // 랜덤 적 생성
-        Type currentEnemyType = EnemySpawner.Instance.GetRandomEnemyType();
+        Enemy = EnemySpawner.Instance.SpawnRandomEnemy();
         
+        //Enemy = new Slime(); // 디버깅용 더미 데이터
 
-        Enemy = new Slime();
         // 죽으면 이벤트 구독
         Enemy.OnDied += WinBattle;
         menuHandler = 1; // 초기화
