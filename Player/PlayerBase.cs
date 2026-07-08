@@ -23,7 +23,7 @@ public abstract class PlayerBase : IDamageable
 
     private bool _isDead = false;
     // --------------------------------------------------------
-    public string JobName {  get; protected set; }
+    public string JobName { get; protected set; }
 
 
     // --------------------------------------------------------
@@ -42,7 +42,7 @@ public abstract class PlayerBase : IDamageable
     };
 
     private int _currentExp = 0;
-    public int CurrentExp { get =>  _currentExp; }
+    public int CurrentExp { get => _currentExp; }
     public int LevelUpExp { get => _maxExpOfLevel[Level - 1]; }
     public bool IsmaxLevel { get => _level == _maxLevel; }
 
@@ -53,7 +53,7 @@ public abstract class PlayerBase : IDamageable
     // --------------------------------------------------------
 
     // 생성자
-    public PlayerBase(int maxHp=100, int maxMp=50, int attack=10, int defence=10)
+    public PlayerBase(int maxHp = 100, int maxMp = 50, int attack = 10, int defence = 10)
     {
 
         VitalStats = new VitalStats(maxHp, maxMp);
@@ -64,7 +64,7 @@ public abstract class PlayerBase : IDamageable
     /// 최종 공격력 (기본 공격력 + 장비 공격력)
     /// </summary>
     public int FinalAttack => CombatStats.BaseAttack;
-     
+
     /// <summary>
     /// 최종 방어력 (기본 방어력 + 장비 방어력)
     /// </summary>
@@ -81,7 +81,7 @@ public abstract class PlayerBase : IDamageable
         // 이전 체력 기록 (방송 용)
         int prevHp = VitalStats.Hp;
         // 데미지 계산
-        int newDamage = Math.Max( damage - FinalDefence,1);
+        int newDamage = Math.Max(damage - FinalDefence, 1);
         // 체력 변경
         VitalStats.ChangeHp(-newDamage);
         // 이벤트 방송 (스탯 전달)
@@ -157,49 +157,11 @@ public abstract class PlayerBase : IDamageable
     public event Action? OnGainExp;
     // 레벨업 했을 때
     public event Action? OnLevelUp;
+
+    //--------------------인벤토리---------------------------------------------------------------------------
+
+
+
 }
 
-
-//-----------------------------------------------------------------------------------------------
-// 아래는 직업 별 클래스
-
-public class Warrior : PlayerBase
-{
-    public Warrior() : base(300, 50, 50, 10)
-    {
-        JobName = "전사";
-    }
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-    }
-
-    protected override void LevelUp()
-    {
-        VitalStats.AdjustStatus(50, 10);
-        CombatStats.AdjustStatus(10, 5);
-
-        base.LevelUp();
-    }
-}
-
-public class Mage : PlayerBase
-{
-    public Mage() : base(200, 100, 20, 7)
-    {
-        JobName = "마법사";
-
-    }
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-    }
-    protected override void LevelUp()
-    {
-        VitalStats.AdjustStatus(40, 20);
-        CombatStats.AdjustStatus(7, 3);
-
-        base.LevelUp();
-    }
-}
 

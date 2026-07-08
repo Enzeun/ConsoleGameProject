@@ -21,10 +21,11 @@ public class Slime : EnemyBase
     public override string Image()
     {
         return (@" 
-                                         _/_
-                                        /   \
+                                         ___
+                                        /  /
+                                       /    \
                                       / o o  \
-                                     (        )
+                                     (   -    )
                                       \______/
             ");
     }

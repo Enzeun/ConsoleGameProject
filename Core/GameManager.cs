@@ -3,6 +3,7 @@ using ConsoleGameFramework.UI;
 using ConsoleGameFramework.Player;
 using ConsoleGameProject.Map;
 using ConsoleGameProject.Scenes;
+using ConsoleGameProject.Player;
 
 namespace ConsoleGameFramework.Core;
 
@@ -122,7 +123,7 @@ public class GameManager
 
 
         // 디버깅 용 건너뛰기 코드
-        Player = new Mage();
+        Player = new Warrior();
         Player.Name = "현준";
         ChangeScene(SceneKey.BattleScene);
         // 디버깅 용 건너뛰기 코드
