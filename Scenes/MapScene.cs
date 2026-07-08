@@ -5,6 +5,7 @@ using ConsoleGameProject.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,13 +18,14 @@ public class MapScene : SceneBase
     MapBase CurrentMap;
     MapBase NextMap;
     bool isLastMap = false;
+    PlayerBase Player;
 
     public override void Enter(GameContext context)
     {
         CurrentMap = GameManager.Instance.CurrentMap;
         NextMap = GameManager.Instance.Maps[GameManager.Instance.CurrentMap.NextMapKey];
         context.AddLog("맵 화면 입니다.");
-
+        Player = GameManager.Instance.Player;
 
         MenuOption NextMapMenu = new MenuOption
         (
@@ -66,13 +68,31 @@ public class MapScene : SceneBase
         ConsoleUI.WriteTitle($"{CurrentMap.Name}", "이 곳은 어디?");
 
         // ---------------------------타이틀 끝나는 곳---------------------------------------------------------
+        
+        // ---------------------------플레이어 이미지---------------------------------------------------------
 
+
+        ConsoleUI.WriteLine("            .----. ");
+        ConsoleUI.WriteLine("            |   -| ");
+        ConsoleUI.WriteLine("            '----'  ");
+        ConsoleUI.WriteLine("            /   |  ");
 
         // ---------------------------플레이어 정보---------------------------------------------------------
-        ConsoleUI.WriteKeyValue($"[{GameManager.Instance.Player.JobName}]", $"[{GameManager.Instance.Player.Name}]",  10);
-        ConsoleUI.WriteStatusBar("HP", GameManager.Instance.Player.CurrentHp, GameManager.Instance.Player.MaxHp);
+        ConsoleUI.WriteKeyValue($"[{Player.JobName}]", $"[{Player.Name}]", 10);
 
-               
+        ConsoleUI.WriteLine($"Lv.{Player.Level}");
+
+        ConsoleUI.WriteStatusBar("HP", Player.CurrentHp, Player.MaxHp);
+        ConsoleUI.WriteStatusBar("MP", Player.CurrentMp, Player.MaxMp, 24, ConsoleColor.DarkBlue);
+        if (!Player.IsmaxLevel)
+        {
+            ConsoleUI.WriteStatusBar("EXP", Player.CurrentExp, Player.LevelUpExp, 24, ConsoleColor.DarkYellow);
+        }
+        else
+        {
+            ConsoleUI.WriteStatusBar("EXP", 999, 999, 24, ConsoleColor.DarkYellow);
+        }
+
 
         // ---------------------------플레이어 정보---------------------------------------------------------
 
@@ -106,7 +126,7 @@ public class MapScene : SceneBase
         {
             case 1:
                 //context.AddLog("1을 눌렀습니다"); // 디버깅
-                GoTo(context,SceneKey.BattleScene);
+                GoTo(context, SceneKey.BattleScene);
                 break;
 
             case 2:

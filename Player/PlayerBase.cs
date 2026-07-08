@@ -16,7 +16,9 @@ public abstract class PlayerBase : IDamageable
     public VitalStats VitalStats { get; private set; }
 
     public int CurrentHp => VitalStats.Hp;
+    public int CurrentMp => VitalStats.Mp;
     public int MaxHp => VitalStats.MaxHp;
+    public int MaxMp => VitalStats.MaxMp;
     public bool IsAlive => VitalStats.IsAlive;
 
     private bool _isDead = false;
@@ -40,6 +42,9 @@ public abstract class PlayerBase : IDamageable
     };
 
     private int _currentExp = 0;
+    public int CurrentExp { get =>  _currentExp; }
+    public int LevelUpExp { get => _maxExpOfLevel[Level - 1]; }
+    public bool IsmaxLevel { get => _level == _maxLevel; }
 
     // --------------------------------------------------------
 

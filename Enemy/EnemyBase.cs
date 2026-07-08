@@ -33,6 +33,7 @@ public class EnemyBase : IDamageable
     /// <param name="defence">방어력</param>
     public EnemyBase(string name, int maxHp)
     {
+        Name = name;
         MaxHp = maxHp;
         CurrentHp = MaxHp;
 
@@ -57,10 +58,13 @@ public class EnemyBase : IDamageable
     public virtual void Die()
     {
         _isDead = true;
-        OnDied?.Invoke();
+        OnDied?.Invoke(Exp);
     }
 
-    public event Action OnDied;
+    /// <summary>
+    /// 죽었을 때 이벤트 / 반환값 : 경험치, 랜덤아이템
+    /// </summary>
+    public event Action<int> OnDied;
 
     // 몬스터 이미지
     public virtual string Image()

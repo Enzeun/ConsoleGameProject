@@ -29,6 +29,10 @@ internal class BattleScene : SceneBase
 
     public override void Enter(GameContext context)
     {
+        // 초기화
+        menuHandler = 1;
+        hasWin = false;
+
         // 플레이어 객체 등록
         Player = GameManager.Instance.Player;
 
@@ -37,22 +41,24 @@ internal class BattleScene : SceneBase
 
         // 랜덤 적 생성
         Enemy = EnemySpawner.Instance.SpawnRandomEnemy();
-        
+
         //Enemy = new Slime(); // 디버깅용 더미 데이터
 
-        // 죽으면 이벤트 구독
+        // 죽었을때의 이벤트 구독
         Enemy.OnDied += WinBattle;
-        menuHandler = 1; // 초기화
-        hasWin = false;
+
         _infoString = "적과 조우했습니다!";
     }
 
-    private void WinBattle()
+    private void WinBattle(int exp)
     {
         hasWin = true;
 
+        Player.GainExp(exp);
+
         _infoString = "승리했습니다!!";
 
+        // 현재는 배틀이 끝나는 조건이 이겼을 때나, 게임오버 밖에 없기 때문에 여기서 구독해제함.
         Enemy.OnDied -= WinBattle;
     }
 
@@ -83,18 +89,19 @@ internal class BattleScene : SceneBase
         //ConsoleUI.WriteLine("|___| |___|");
 
 
+        ConsoleUI.WriteLine($"                                        {Enemy.Name}");
         ConsoleUI.WriteLine($"{Enemy.Image()}");
-        ConsoleUI.WriteLine();
 
-        // 몬스터 이름 : HP 바
-        ConsoleUI.WriteStatusBar($"{Enemy.Name}", Enemy.CurrentHp, Enemy.MaxHp, 24, ConsoleColor.DarkRed);
+        // 몬스터 이름
+        // HP 바
+        ConsoleUI.WriteStatusBar($"HP", Enemy.CurrentHp, Enemy.MaxHp, 24, ConsoleColor.DarkRed);
         // --------------------------- (빈칸)  ---------------------------------------------------------
-        
+
         ConsoleUI.WriteLine();
         ConsoleUI.WriteLine();
 
-        // ---------------------------플레이어 정보---------------------------------------------------------
-        
+        // ---------------------------플레이어 이미지---------------------------------------------------------
+
 
         ConsoleUI.WriteLine("            .----. ");
         ConsoleUI.WriteLine("            |   -| ");
@@ -106,6 +113,16 @@ internal class BattleScene : SceneBase
         ConsoleUI.WriteKeyValue($"[{Player.JobName}]", $"[{Player.Name}]", 10);
         ConsoleUI.WriteLine($"Lv.{Player.Level}");
         ConsoleUI.WriteStatusBar("HP", Player.CurrentHp, Player.MaxHp);
+        ConsoleUI.WriteStatusBar("MP", Player.CurrentMp, Player.MaxMp, 24, ConsoleColor.DarkBlue);
+        if (!Player.IsmaxLevel)
+        {
+            ConsoleUI.WriteStatusBar("EXP", Player.CurrentExp, Player.LevelUpExp, 24, ConsoleColor.DarkYellow);
+        }
+        else
+        {
+            ConsoleUI.WriteStatusBar("EXP", 999, 999, 24, ConsoleColor.DarkYellow);
+        }
+
 
         // ---------------------------로그---------------------------------------------------------
         //ConsoleUI.WriteLog(context.Logs);
@@ -147,15 +164,15 @@ internal class BattleScene : SceneBase
     private void NextTurn()
     {
         _isPlayerTurn = !_isPlayerTurn;
-        
+
     }
 
     private void PlayerAttack()
     {
         _infoString = "플레이어가 공격합니다!";
-                
+
         Enemy.TakeDamage(Player.FinalAttack);
-               
+
         NextTurn();
     }
 

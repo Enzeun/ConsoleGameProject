@@ -15,7 +15,7 @@ public class Slime : EnemyBase
     {
         Attack = 10;
         Defence = 8;
-        Exp = 20;
+        Exp = 30;
     }
 
     public override string Image()
@@ -35,7 +35,7 @@ public class Wolf : EnemyBase
     {
         Attack = 20;
         Defence = 2;
-        Exp = 30;
+        Exp = 40;
 
     }
 
@@ -56,7 +56,7 @@ public class Goblin : EnemyBase
     {
         Attack = 15;
         Defence = 4;
-        Exp = 40;
+        Exp = 50;
 
     }
     public override string Image()
