@@ -23,7 +23,7 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
     public int MaxMp => VitalStats.MaxMp;
     public bool IsAlive => VitalStats.IsAlive;
 
-    private bool _isDead = false;
+    private bool _isDead = false;   
     // --------------------------------------------------------
     public string JobName { get; protected set; }
 

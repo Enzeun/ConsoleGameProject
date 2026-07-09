@@ -71,13 +71,13 @@ public static class ItemData
             {012, new RotenArmor()},
             {013, new IronArmor()},
             {014, new ChainArmor()},
-            {111,new SmallHpPotion() },
-            {112,new HpPotion() },
-            {113,new BigHpPotion() },
-            {116,new SmallMpPotion()  },
-            {117,new MpPotion()  },
-            {118,new BigMpPotion()  },
-            {999,new BossTicket()  },
+            {111, new SmallHpPotion() },
+            {112, new HpPotion() },
+            {113, new BigHpPotion() },
+            {116, new SmallMpPotion()  },
+            {117, new MpPotion()  },
+            {118, new BigMpPotion()  },
+            {999, new BossTicket()  },
         };
 
 
@@ -141,24 +141,31 @@ public static class ItemData
             if (item is Weapon)
             {
                 Weapon weapon = (Weapon)item;
+
                 if (Player.EquippedWeapon == weapon)
                 {
-                    itemDesc = "[장비됨]";
+                    itemName += " [장비됨]";
                     canUse = false;
                 }         
                 else if (Player.JobName != weapon.CompatibleJob)
                 {
-                    itemDesc = "[장비불가]";
+                    itemName += " [장비불가]";
                     canUse = false;
                 }
+
+                itemDesc += $"공격력 + {weapon.Attack}";
             }
             else if (item is Armor)
             {
-                if (Player.EquippedArmor == item)
+                Armor armor = (Armor)item;
+
+                if (Player.EquippedArmor == armor)
                 {
-                    itemDesc = "[장비됨]";
+                    itemName += " [장비됨]";
                     canUse = false;
                 }
+
+                itemDesc += $"방어력 + {armor.Defence}";
             }
 
             MenuOption menuOption = new MenuOption(count, $"{itemName}", $"{itemDesc}", canUse);

@@ -67,7 +67,7 @@ public class Mage : PlayerBase
 
 
         // 기본무기 추가
-        AddEquimentItem(001);
+        AddEquimentItem(006);
 
         // 기본방어구 추가
         AddEquimentItem(011);
