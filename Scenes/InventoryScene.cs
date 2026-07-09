@@ -47,8 +47,10 @@ public class InventoryScene : SceneBase
 
         ConsoleUI.WriteMenu(Menu, "사용할 아이템 선택");
 
+        ConsoleUI.WriteToast("물약은 최대치를 넘어서까지 사용됨을 주의하세요!",ToastType.Warning);
+
         // ---------------------------로그---------------------------------------------------------
-        ConsoleUI.WriteLog(context.Logs);
+        //ConsoleUI.WriteLog(context.Logs);
     }
 
     
