@@ -1,6 +1,7 @@
 using ConsoleGameFramework.Core;
 using ConsoleGameFramework.Player;
 using ConsoleGameFramework.UI;
+using ConsoleGameProject.Player;
 
 namespace ConsoleGameFramework.Scenes;
 

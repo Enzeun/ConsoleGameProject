@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleGameProject.Item
+namespace ConsoleGameProject.Skill;
+
+public interface ISkillCaster
 {
-    public interface IConsumable
-    {
-    }
 }

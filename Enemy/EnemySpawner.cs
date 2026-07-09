@@ -72,6 +72,6 @@ public class EnemySpawner
 
         }
 
-        return new Slime();
+        throw new InvalidOperationException();
     }
 }

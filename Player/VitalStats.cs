@@ -28,6 +28,11 @@ public class VitalStats
         Hp = Math.Clamp(Hp + amount, 0, MaxHp);
     }
 
+    public void ChangeMp(int amount)
+    {
+        Mp = Math.Clamp(Mp + amount, 0, MaxMp);
+    }
+
     public void AdjustStatus(int maxHpIncreament,int maxMpIncreament)
     {
         MaxHp += maxHpIncreament;

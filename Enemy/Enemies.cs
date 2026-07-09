@@ -15,28 +15,47 @@ public class Slime : EnemyBase
     {
         Attack = 10;
         Defence = 8;
-        Exp = 20;
+        Exp = 30;
+
+        DropTable = new()
+        {
+            { 111,10 },
+            { 116,10 },
+            { 001,5 },
+            { 005,5 }
+        };
     }
 
     public override string Image()
     {
         return (@" 
-                                         _/_
-                                        /   \
-                                      / o o  \
-                                     (        )
-                                      \______/
+                                       ███ 
+                                     ██   █
+                                    █████
+                                   █████████
+                                  ████████████
+                                 ███ ███ ███████
+                                ██████████████████
+                                 █████████████████
+                                  ███████████████
             ");
     }
 }
 public class Wolf : EnemyBase
 {
-    public Wolf() : base("늑대", 70)
+    public Wolf() : base("늑대(?)", 70)
     {
         Attack = 20;
         Defence = 2;
-        Exp = 30;
+        Exp = 40;
 
+        DropTable = new ()
+        {
+            { 111,10 },
+            { 116,10 },
+            { 001,5 },
+            { 005,5 }
+        };
     }
 
     public override string Image()
@@ -56,8 +75,15 @@ public class Goblin : EnemyBase
     {
         Attack = 15;
         Defence = 4;
-        Exp = 40;
+        Exp = 50;
 
+        DropTable = new()
+        {
+            { 111,10 },
+            { 116,10 },
+            { 001,5 },
+            { 005,5 }
+        };
     }
     public override string Image()
     {
@@ -72,4 +98,3 @@ public class Goblin : EnemyBase
             ");
     }
 }
-

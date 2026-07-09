@@ -17,5 +17,8 @@ public enum SceneKey
     Loading,
     PopUpNaxtMap,
     BattleScene,
+    InventoryScene,
+    EquipmentScene,
+    PlayerInfoScene,
 
 }
