@@ -72,8 +72,7 @@ public class EquipmentScene : SceneBase
     {
         int key = ItemMapping[num];
 
-        Player.EquipArmor(key); 
-        Player.EquipWeapon(key); 
+        Player.EquipItem(key);          
 
         ConsoleUI.WriteLine("아이템을 사용했습니다.");
     }

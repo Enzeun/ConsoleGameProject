@@ -216,7 +216,7 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
     public int AddEquimentItem(int itemId = 001)
     {
         // 데이터에 없는 아이템이면 false
-        if (!ItemData.Data.ContainsKey(itemId))
+        if (ItemData.Data.ContainsKey(itemId) == false)
         {
             GameManager.Instance.Context.AddLog("없는 아이템입니다");
             return -1;
@@ -239,39 +239,28 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
         }
     }
 
-    public void EquipWeapon(int itemId)
+    public void EquipItem(int itemId)
     {
         // 데이터에 없는 아이템이면 return
-        if (!ItemData.Data.ContainsKey(itemId))
+        if (ItemData.Data.ContainsKey(itemId) == false)
         {
             GameManager.Instance.Context.AddLog("없는 아이템입니다");
             return;
         }
 
-        ItemBase item = ItemData.Data[itemId];
-
-        if (!(item is IEquipable))
-            return;
-
-        EquippedWeapon = (Weapon)item;
-    }
-    public void EquipArmor(int itemId)
-    {
-        // 데이터에 없는 아이템이면 return
-        if (!ItemData.Data.ContainsKey(itemId))
+        // 무기면 무기칸, 방어구면 방어칸에 장비 / 둘 다 아니면 return
+        if (ItemData.Data[itemId] is Weapon weapon)
         {
-            GameManager.Instance.Context.AddLog("없는 아이템입니다");
-            return;
+            EquippedWeapon = weapon;
         }
-
-        ItemBase item = ItemData.Data[itemId];
-
-        if (!(item is IEquipable))
-            return;
-
-        EquippedArmor = (Armor)item;
+        else if (ItemData.Data[itemId] is Armor armor)
+        {
+            EquippedArmor = armor;
+        }
+        else return;
+        
     }
-
+    
 
 
 

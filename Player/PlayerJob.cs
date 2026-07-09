@@ -33,8 +33,8 @@ public class Warrior : PlayerBase
         AddConsumableItem(116);
 
         // 기본장비 장착
-        EquipWeapon(001);
-        EquipArmor(011);
+        EquipItem(001);
+        EquipItem(011);
     }
     public override void TakeDamage(int damage)
     {
@@ -78,8 +78,8 @@ public class Mage : PlayerBase
         AddConsumableItem(116);
 
         // 기본장비 장착
-        EquipWeapon(001);
-        EquipArmor(011);
+        EquipItem(001);
+        EquipItem(011);
     }
     public override void TakeDamage(int damage)
     {
