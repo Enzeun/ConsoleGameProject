@@ -111,6 +111,7 @@ public class GameManager
         AddScene(new InventoryScene());
         AddScene(new EquipmentScene());
         AddScene(new PlayerInfoScene());
+        AddScene(new ClearScene());
     }
 
     private void AddScene(IScene scene)

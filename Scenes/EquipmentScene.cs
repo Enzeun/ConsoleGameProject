@@ -48,7 +48,7 @@ public class EquipmentScene : SceneBase
         ConsoleUI.WriteMenu(Menu, "장착할 장비 선택");
 
         // ---------------------------로그---------------------------------------------------------
-        ConsoleUI.WriteLog(context.Logs);
+        //ConsoleUI.WriteLog(context.Logs);
     }
 
   

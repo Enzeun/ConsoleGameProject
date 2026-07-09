@@ -80,7 +80,20 @@ public class EnemySpawner
                 return new Wolf();
             case EnemyKey.Goblin:
                 return new Goblin();
-
+            case EnemyKey.Golem:
+                return new Golem();
+            case EnemyKey.BigBug:
+                return new BigBug();
+            case EnemyKey.Mummy:
+                return new Mummy();
+            case EnemyKey.Skeleton:
+                return new Skeleton();
+            case EnemyKey.Knight:
+                return new Knight();
+            case EnemyKey.Guardian:
+                return new Guardian();
+            case EnemyKey.Boss:
+                return new Boss();
 
 
 

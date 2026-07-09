@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameFramework.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -378,5 +379,12 @@ public class Boss : EnemyBase
                                          \  /   \  /
                                           \/_____\/                   
             ");
+    }
+
+    public override void Die()
+    {
+        GameManager.Instance.ChangeScene(SceneKey.ClearScene);
+        
+        base.Die();
     }
 }

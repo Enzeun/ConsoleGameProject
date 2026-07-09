@@ -105,7 +105,7 @@ public class MapScene : SceneBase
         ConsoleUI.WriteMenu(Menu, "행동 선택");
 
         // ---------------------------로그---------------------------------------------------------
-        ConsoleUI.WriteLog(context.Logs);
+        //ConsoleUI.WriteLog(context.Logs);
     }
 
     private static readonly List<MenuOption> Menu = new List<MenuOption>
@@ -116,10 +116,9 @@ public class MapScene : SceneBase
         new MenuOption(4, "장비 확인."),
         new MenuOption(5, "플레이어 상태 확인."),
                 
-        //new MenuOption(9, "레벨업."), // 디버깅용
-        //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다."),
-        new MenuOption(8, "아이템과 경험치 얻기", "치트키"), // 디버깅
+        //new MenuOption(8, "아이템과 경험치 얻기", "치트키"), // 디버깅
+        //new MenuOption(7, "보스전투", "치트키"), // 디버깅
     };
 
     public override void HandleInput(GameContext context)
@@ -169,26 +168,32 @@ public class MapScene : SceneBase
                 context.Game.RequestQuit();
                 break;
 
-            case 8:
-                //Player.GainExp(100);
-                Player.AddEquimentItem(002);
-                Player.AddEquimentItem(003);
-                Player.AddEquimentItem(004);
-                Player.AddEquimentItem(006);
-                Player.AddEquimentItem(007);
-                Player.AddEquimentItem(008);
-                Player.AddEquimentItem(012);
-                Player.AddEquimentItem(013);
-                Player.AddEquimentItem(014);
-                Player.AddConsumableItem(999);
-                Player.AddConsumableItem(111);
-                Player.AddConsumableItem(112);
-                Player.AddConsumableItem(113);
-                Player.AddConsumableItem(116);
-                Player.AddConsumableItem(117);
-                Player.AddConsumableItem(118);
-                //GoTo(context, SceneKey.Map);
-                break;
+            //case 7:
+            //    GameManager.Instance.ChangeMap(MapKey.BossMap);
+            //    GoTo(context, SceneKey.BattleScene);
+            //    break;
+
+            //case 8:
+            //    //Player.GainExp(100);
+            //    Player.AddEquimentItem(002);
+            //    Player.AddEquimentItem(003);
+            //    Player.AddEquimentItem(004);
+            //    Player.AddEquimentItem(006);
+            //    Player.AddEquimentItem(007);
+            //    Player.AddEquimentItem(008);
+            //    Player.AddEquimentItem(012);
+            //    Player.AddEquimentItem(013);
+            //    Player.AddEquimentItem(014);
+            //    Player.AddConsumableItem(999);
+            //    Player.AddConsumableItem(111);
+            //    Player.AddConsumableItem(112);
+            //    Player.AddConsumableItem(113);
+            //    Player.AddConsumableItem(116);
+            //    Player.AddConsumableItem(117);
+            //    Player.AddConsumableItem(118);
+            //    Player.GainExp(Player.LevelUpExp);
+            //    //GoTo(context, SceneKey.Map);
+            //    break;
         }
     }
 }
