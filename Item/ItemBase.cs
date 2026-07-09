@@ -71,13 +71,13 @@ public static class ItemData
             {012, new RotenArmor()},
             {013, new IronArmor()},
             {014, new ChainArmor()},
-            {111,new SmallHpPotion() },
-            {112,new HpPotion() },
-            {113,new BigHpPotion() },
-            {116,new SmallMpPotion()  },
-            {117,new MpPotion()  },
-            {118,new BigMpPotion()  },
-            {999,new BossTicket()  },
+            {111, new SmallHpPotion() },
+            {112, new HpPotion() },
+            {113, new BigHpPotion() },
+            {116, new SmallMpPotion()  },
+            {117, new MpPotion()  },
+            {118, new BigMpPotion()  },
+            {999, new BossTicket()  },
         };
 
 
