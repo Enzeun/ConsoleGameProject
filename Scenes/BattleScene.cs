@@ -63,7 +63,7 @@ internal class BattleScene : SceneBase
 
         _infoString = "승리했습니다!!";
 
-        
+
         // 현재는 배틀이 끝나는 조건이 이겼을 때나, 게임오버 밖에 없기 때문에 여기서 구독해제함.
         Enemy.OnDied -= WinBattle;
     }
@@ -161,10 +161,15 @@ internal class BattleScene : SceneBase
         SkillMenu.Clear();
         for (int i = 0; i < Player.SkillList.Count; i++)
         {
-            if (i > 4) // 스킬은 최대 4개 까지만 허용
-                return;
+            //if (i > 4) // 스킬은 최대 4개 까지만 허용
+            //    return;
 
-            MenuOption menuOption = new MenuOption(i + 1, Player.SkillList[i].Name, Player.SkillList[i].Description);
+            bool canUseSkill = true;
+
+            if (Player.CurrentMp < Player.SkillList[i].ConsumeMp)
+                canUseSkill = false;
+
+            MenuOption menuOption = new MenuOption(i + 1, Player.SkillList[i].Name, Player.SkillList[i].Description, canUseSkill);
 
             if (SkillMenu.Contains(menuOption))
                 continue;
@@ -231,6 +236,11 @@ internal class BattleScene : SceneBase
 
         if (hasWin)
         {
+            if (Enemy is Boss)
+            {
+                GoTo(context, SceneKey.ClearScene);
+            }
+
             // 아이템 드롭 처리
             int drop = Enemy.DropRandomItem();
 
@@ -253,7 +263,7 @@ internal class BattleScene : SceneBase
                         Player.AddConsumableItem(drop);
                         ConsoleUI.ReadString($"'{name}'을 얻었습니다.", "엔터를 눌러 계속");
                         break;
-                }               
+                }
             }
 
             GoTo(context, SceneKey.Map);
@@ -326,20 +336,20 @@ internal class BattleScene : SceneBase
 
 
 
-                //// ---------------------------인벤토리 메뉴---------------------------------------------------------
-                //case 3:
-                //    ConsoleUI.WriteMenu(InventoryMenu, "아이템 선택");
-                //    choice = ConsoleUI.ReadMenuChoice(InventoryMenu);
+                    //// ---------------------------인벤토리 메뉴---------------------------------------------------------
+                    //case 3:
+                    //    ConsoleUI.WriteMenu(InventoryMenu, "아이템 선택");
+                    //    choice = ConsoleUI.ReadMenuChoice(InventoryMenu);
 
-                //    switch (choice)
-                //    {
-                //        case 0: // 취소                    
-                //            context.AddLog("인벤토리 -> 선택메뉴"); // 디버깅
-                //            menuHandler = 1;
-                //            break;
-                //    }
+                    //    switch (choice)
+                    //    {
+                    //        case 0: // 취소                    
+                    //            context.AddLog("인벤토리 -> 선택메뉴"); // 디버깅
+                    //            menuHandler = 1;
+                    //            break;
+                    //    }
 
-                //    break;
+                    //    break;
 
             }
         }

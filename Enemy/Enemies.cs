@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameFramework.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,13 +55,13 @@ public class Wolf : EnemyBase
 
         DropTable = new()
         {
-            { 111,10 }, //포션
-            { 116,10 },
+            { 111,20 }, //포션
+            { 116,20 },
 
-            { 002,5 }, //무기
-            { 006,5 },
+            { 002,15 }, //무기
+            { 006,15 },
 
-            { 012,5 }, //방어구
+            { 012,15 }, //방어구
         };
     }
 
@@ -71,6 +72,9 @@ public class Wolf : EnemyBase
                                    /  o   o  \
                                   ( ==  ^  == )
                                    )         (
+                                  (           )
+                                   ( (  ^  ) )
+                                    (__(__)_)
             ");
     }
 }
@@ -85,13 +89,13 @@ public class Goblin : EnemyBase
 
         DropTable = new()
         {
-            { 111,10 }, //포션
-            { 116,10 },
+            { 111,20 }, //포션
+            { 116,20 },
 
-            { 002,5 }, //무기
-            { 006,5 },
+            { 002,15 }, //무기
+            { 006,15 },
 
-            { 012,5 }, //방어구
+            { 012,15 }, //방어구
         };
     }
     public override string Image()
@@ -119,9 +123,9 @@ public class Golem : EnemyBase
         DropTable = new()
         {
             { 111,5 }, //포션
-            { 112,10 },
+            { 112,15 },
             { 116,5 },
-            { 117,10 },
+            { 117,15 },
 
             { 002,10 }, //무기
             { 003,5 },
@@ -135,13 +139,15 @@ public class Golem : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                              ███████
+                                            ███▓▓▓███
+                                           ██▓████▓██
+                                          ██▓██████▓██
+                                          ██▓██████▓██
+                                          ██▓██████▓██
+                                          ████████████
+                                           ▐██▌  ▐██▌
+                                           ▐██▌  ▐██▌                      
             ");
     }
 }
@@ -157,9 +163,9 @@ public class BigBug : EnemyBase
         DropTable = new()
         {
             { 111,5 }, //포션
-            { 112,10 },
+            { 112,15 },
             { 116,5 },
-            { 117,10 },
+            { 117,15 },
 
             { 002,10 }, //무기
             { 003,5 },
@@ -173,13 +179,12 @@ public class BigBug : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                       \/     \/
+                                        \_____/
+                                       /  o o  \
+                                      (    -    )
+                                       \_______/
+                                       /| | | | \                    
             ");
     }
 }
@@ -202,9 +207,9 @@ public class Mummy : EnemyBase
             { 118,10 },
 
             { 003,10 }, //무기
-            { 004,5 },
+            { 004,10 },
             { 007,10 },
-            { 008,5 },
+            { 008,10 },
 
             { 013,10 }, //방어구
             { 014,5 },
@@ -213,13 +218,14 @@ public class Mummy : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                       [XXXXXX]
+                                       [oo  oo]
+                                      /[______]\
+                                      ||  ||  ||
+                                      \[______]/
+                                       |      |
+                                       |______|
+                                       |_|  |_|                    
             ");
     }
 }
@@ -241,9 +247,9 @@ public class Skeleton : EnemyBase
             { 118,10 },
 
             { 003,10 }, //무기
-            { 004,5 },
+            { 004,10 },
             { 007,10 },
-            { 008,5 },
+            { 008,10 },
 
             { 013,10 }, //방어구
             { 014,5 },
@@ -252,13 +258,16 @@ public class Skeleton : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                           .-.
+                                          (o o)
+                                           |=|
+                                          __|__
+                                        //.=|=.\\
+                                       // .=|=. \\
+                                       \\ .=|=. //
+                                        \\(_=_)//
+                                          /   \
+                                         ^^   ^^                     
             ");
     }
 }
@@ -275,27 +284,30 @@ public class Knight : EnemyBase
 
         DropTable = new()
         {
-            { 113,15 }, //포션
-            { 118,15 },
+            { 113,20 }, //포션
+            { 118,20 },
 
             { 004,15 }, //무기
             { 008,15 },
 
             { 014,15 }, //방어구
 
-            { 999,15 }, //보스티켓
+            { 999,5 }, //보스티켓
         };
     }
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                            ▲
+                                           ▓█▓
+                                          ▓████▓
+                                         ███▀▀███
+                                         ██╔══╗██
+                                         ██║██║██
+                                        ▄██║██║██▄
+                                       ████████████
+                                          ║████║
+                                         ▐█╝  ╚█▌                     
             ");
     }
 }
@@ -313,10 +325,10 @@ public class Guardian : EnemyBase
             { 113,15 }, //포션
             { 118,15 },
 
-            { 004,15 }, //무기
-            { 008,15 },
+            { 004,20 }, //무기
+            { 008,20 },
 
-            { 014,15 }, //방어구
+            { 014,5 }, //방어구
 
             { 999,15 }, //보스티켓
         };
@@ -324,13 +336,13 @@ public class Guardian : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                          _______
+                                         /|     |\
+                                        | | [O] | |
+                                        | |_____| |
+                                        |/[_____]\|
+                                         |  /|\  |
+                                         |_/ | \_|                    
             ");
     }
 }
@@ -359,13 +371,20 @@ public class Boss : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                          /\     /\
+                                         /  \___/  \
+                                        |  /[_ _]\  |
+                                        |-[_  o  _]-|
+                                        |  \[---]/  |
+                                         \  /   \  /
+                                          \/_____\/                   
             ");
+    }
+
+    public override void Die()
+    {
+        GameManager.Instance.ChangeScene(SceneKey.ClearScene);
+        
+        base.Die();
     }
 }

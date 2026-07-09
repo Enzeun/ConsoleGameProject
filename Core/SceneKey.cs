@@ -20,5 +20,7 @@ public enum SceneKey
     InventoryScene,
     EquipmentScene,
     PlayerInfoScene,
+    
+    ClearScene,
 
 }

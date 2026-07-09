@@ -86,10 +86,10 @@ public class EnemyBase : IDamageable
 
         foreach (var item in DropTable)
         {
-                Console.WriteLine($"랜덤값 : {randomInt}   /   현재값 : {CurrentCount}");
+                //Console.WriteLine($"랜덤값 : {randomInt}   /   현재값 : {CurrentCount}");
             if (item.Value + CurrentCount >= randomInt)
             {                
-                Console.WriteLine($"{item.Value}");
+                //Console.WriteLine($"{item.Value}");
                 return item.Key;
             } 
             else
