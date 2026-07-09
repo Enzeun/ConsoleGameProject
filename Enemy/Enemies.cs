@@ -71,6 +71,9 @@ public class Wolf : EnemyBase
                                    /  o   o  \
                                   ( ==  ^  == )
                                    )         (
+                                  (           )
+                                   ( (  ^  ) )
+                                    (__(__)_)
             ");
     }
 }
@@ -135,13 +138,15 @@ public class Golem : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                              ███████
+                                            ███▓▓▓███
+                                           ██▓████▓██
+                                          ██▓██████▓██
+                                          ██▓██████▓██
+                                          ██▓██████▓██
+                                          ████████████
+                                           ▐██▌  ▐██▌
+                                           ▐██▌  ▐██▌                      
             ");
     }
 }
@@ -173,13 +178,12 @@ public class BigBug : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                       \/     \/
+                                        \_____/
+                                       /  o o  \
+                                      (    -    )
+                                       \_______/
+                                       /| | | | \                    
             ");
     }
 }
@@ -213,13 +217,14 @@ public class Mummy : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                       [XXXXXX]
+                                       [oo  oo]
+                                      /[______]\
+                                      ||  ||  ||
+                                      \[______]/
+                                       |      |
+                                       |______|
+                                       |_|  |_|                    
             ");
     }
 }
@@ -252,13 +257,16 @@ public class Skeleton : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                           .-.
+                                          (o o)
+                                           |=|
+                                          __|__
+                                        //.=|=.\\
+                                       // .=|=. \\
+                                       \\ .=|=. //
+                                        \\(_=_)//
+                                          /   \
+                                         ^^   ^^                     
             ");
     }
 }
@@ -289,13 +297,16 @@ public class Knight : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                            ▲
+                                           ▓█▓
+                                          ▓████▓
+                                         ███▀▀███
+                                         ██╔══╗██
+                                         ██║██║██
+                                        ▄██║██║██▄
+                                       ████████████
+                                          ║████║
+                                         ▐█╝  ╚█▌                     
             ");
     }
 }
@@ -324,13 +335,13 @@ public class Guardian : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                          _______
+                                         /|     |\
+                                        | | [O] | |
+                                        | |_____| |
+                                        |/[_____]\|
+                                         |  /|\  |
+                                         |_/ | \_|                    
             ");
     }
 }
@@ -359,13 +370,13 @@ public class Boss : EnemyBase
     public override string Image()
     {
         return (@" 
-                                       __
-                                     _/  \_
-                                    / @ @  \
-                                   | <___>  |
-                                   | \___/  |
-                                    \ WWW  /
-                                     \____/                      
+                                          /\     /\
+                                         /  \___/  \
+                                        |  /[_ _]\  |
+                                        |-[_  o  _]-|
+                                        |  \[---]/  |
+                                         \  /   \  /
+                                          \/_____\/                   
             ");
     }
 }
