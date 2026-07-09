@@ -78,7 +78,7 @@ public class Mage : PlayerBase
         AddConsumableItem(116);
 
         // 기본장비 장착
-        EquipItem(001);
+        EquipItem(006);
         EquipItem(011);
     }
     public override void TakeDamage(int damage)

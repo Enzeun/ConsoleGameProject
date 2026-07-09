@@ -108,6 +108,7 @@ public class GameManager
         AddScene(new BattleScene());
         AddScene(new InventoryScene());
         AddScene(new EquipmentScene());
+        AddScene(new PlayerInfoScene());
     }
 
     private void AddScene(IScene scene)
@@ -124,9 +125,9 @@ public class GameManager
         ChangeScene(SceneKey.NewTitle);
 
 
-        Player = new Warrior();
-        Player.Name = "현준";
-        ChangeScene(SceneKey.Map);
+        //Player = new Warrior();
+        //Player.Name = "현준";
+        //ChangeScene(SceneKey.Map);
         // 디버깅 용 건너뛰기 코드
 
         
