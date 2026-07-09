@@ -43,7 +43,7 @@ public class Warrior : PlayerBase
 
     protected override void LevelUp()
     {
-        VitalStats.AdjustStatus(50, 10);
+        VitalStats.AdjustStatus(100, 20);
         CombatStats.AdjustStatus(10, 5);
 
         base.LevelUp();
@@ -87,7 +87,7 @@ public class Mage : PlayerBase
     }
     protected override void LevelUp()
     {
-        VitalStats.AdjustStatus(40, 20);
+        VitalStats.AdjustStatus(70, 50);
         CombatStats.AdjustStatus(7, 3);
 
         base.LevelUp();

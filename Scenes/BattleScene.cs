@@ -161,10 +161,15 @@ internal class BattleScene : SceneBase
         SkillMenu.Clear();
         for (int i = 0; i < Player.SkillList.Count; i++)
         {
-            if (i > 4) // 스킬은 최대 4개 까지만 허용
-                return;
+            //if (i > 4) // 스킬은 최대 4개 까지만 허용
+            //    return;
 
-            MenuOption menuOption = new MenuOption(i + 1, Player.SkillList[i].Name, Player.SkillList[i].Description);
+            bool canUseSkill = true;
+
+            if (Player.CurrentMp < Player.SkillList[i].ConsumeMp)
+                canUseSkill = false;
+
+            MenuOption menuOption = new MenuOption(i + 1, Player.SkillList[i].Name, Player.SkillList[i].Description, canUseSkill);
 
             if (SkillMenu.Contains(menuOption))
                 continue;
