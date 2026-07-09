@@ -19,5 +19,6 @@ public enum SceneKey
     BattleScene,
     InventoryScene,
     EquipmentScene,
+    PlayerInfoScene,
 
 }

@@ -147,6 +147,10 @@ public class MapScene : SceneBase
                 GoTo(context, SceneKey.EquipmentScene);
                 break;
 
+            case 5:
+                GoTo(context, SceneKey.PlayerInfoScene);
+                break;
+
             case 9:
                 GoTo(context, SceneKey.NewTitle);
                 break;
