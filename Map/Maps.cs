@@ -35,6 +35,14 @@ namespace ConsoleGameProject.Map
     {
         public Castle() : base(MapKey.Castle, "마왕성", 9)
         {
+            NextMapKey = MapKey.BossMap;
+            //NextMapId = 999;
+        }
+    }
+    public class BossMap : MapBase
+    {
+        public BossMap() : base(MapKey.BossMap, "보스", 10)
+        {
             NextMapKey = MapKey.Dummy;
             //NextMapId = 999;
         }

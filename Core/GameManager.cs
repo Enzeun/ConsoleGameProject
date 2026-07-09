@@ -5,6 +5,7 @@ using ConsoleGameProject.Map;
 using ConsoleGameProject.Scenes;
 using ConsoleGameProject.Player;
 using ConsoleGameProject.Item;
+using ConsoleGameProject.Enemy;
 
 namespace ConsoleGameFramework.Core;
 
@@ -34,6 +35,7 @@ public class GameManager
         AddMaps(new Forest());
         AddMaps(new Grave());
         AddMaps(new Castle());
+        AddMaps(new BossMap());
         AddMaps(new Dummy());
 
         CurrentMap = Maps[MapKey.GrassField];

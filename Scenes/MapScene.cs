@@ -45,9 +45,8 @@ public class MapScene : SceneBase
             2,
             "마왕과 전투한다",
             $"보스 티켓이 있으면 전투를 시작할 수 있습니다",
-            false
+            (Player.ConsumableInventory.ContainsKey(999))
             );
-            // 키가 있으면 전투메뉴 활성화 << 구현 필요 **
         }
 
 
@@ -120,7 +119,7 @@ public class MapScene : SceneBase
         //new MenuOption(9, "레벨업."), // 디버깅용
         //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
         new MenuOption(0, "종료", "프로그램을 종료합니다."),
-        new MenuOption(8, "아이템 얻기", "프로그램을 종료합니다."), // 디버깅
+        new MenuOption(8, "아이템과 경험치 얻기", "치트키"), // 디버깅
     };
 
     public override void HandleInput(GameContext context)
@@ -135,16 +134,23 @@ public class MapScene : SceneBase
                 break;
 
             case 2:
-                if (ConsoleUI.Confirm("정말 이동 하시겠습니까? *이동 한 후에는 다시 되돌아갈 수 없습니다."))
+                if (!isLastMap)
                 {
-                    GameManager.Instance.ChangeMap(NextMap.Key);
-                    GoTo(context, SceneKey.Map);
+                    if (ConsoleUI.Confirm("정말 이동 하시겠습니까? *이동 한 후에는 다시 되돌아갈 수 없습니다."))
+                    {
+                        GameManager.Instance.ChangeMap(NextMap.Key);
+                        GoTo(context, SceneKey.Map);
+                    }
                 }
-                context.AddLog("마지막 맵입니다"); // 디버깅
+                else if (isLastMap)
+                {
+                    GameManager.Instance.ChangeMap(MapKey.BossMap);
+                    GoTo(context, SceneKey.BattleScene);
+                }
                 break;
 
             case 3:
-                GoTo(context, SceneKey.InventoryScene);             
+                GoTo(context, SceneKey.InventoryScene);
                 break;
 
             case 4:
@@ -171,10 +177,18 @@ public class MapScene : SceneBase
                 Player.AddEquimentItem(006);
                 Player.AddEquimentItem(007);
                 Player.AddEquimentItem(008);
+                Player.AddEquimentItem(012);
+                Player.AddEquimentItem(013);
+                Player.AddEquimentItem(014);
                 Player.AddConsumableItem(999);
+                Player.AddConsumableItem(111);
+                Player.AddConsumableItem(112);
+                Player.AddConsumableItem(113);
+                Player.AddConsumableItem(116);
+                Player.AddConsumableItem(117);
+                Player.AddConsumableItem(118);
                 //GoTo(context, SceneKey.Map);
                 break;
         }
     }
-
 }
