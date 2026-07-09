@@ -29,12 +29,15 @@ public class Slime : EnemyBase
     public override string Image()
     {
         return (@" 
-                                         ___
-                                        /  /
-                                       /    \
-                                      / o o  \
-                                     (   -    )
-                                      \______/
+                                       ███ 
+                                     ██   █
+                                    █████
+                                   █████████
+                                  ████████████
+                                 ███ ███ ███████
+                                ██████████████████
+                                 █████████████████
+                                  ███████████████
             ");
     }
 }
@@ -95,4 +98,3 @@ public class Goblin : EnemyBase
             ");
     }
 }
-
