@@ -12,7 +12,9 @@ public enum MapKey
     Forest,
     Cave,
     Castle,
+    
 
+    BossMap,
 
     Dummy,
 }

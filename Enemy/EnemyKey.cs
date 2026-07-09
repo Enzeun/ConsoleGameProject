@@ -11,4 +11,11 @@ public enum EnemyKey
     Slime,
     Goblin,
     Wolf,
+    Golem,
+    BigBug,
+    Mummy,
+    Skeleton,
+    Knight,
+    Guardian,
+    Boss,
 }

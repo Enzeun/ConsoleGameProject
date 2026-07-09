@@ -138,7 +138,7 @@ internal class BattleScene : SceneBase
     {
         new MenuOption(1, "기본 공격"),
         new MenuOption(2, "스킬 사용"),
-        new MenuOption(3, "인벤토리 열기"),                
+        //new MenuOption(3, "인벤토리 열기"),                
 
         //new MenuOption(9, "레벨업."), // 디버깅용
         //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
@@ -326,20 +326,20 @@ internal class BattleScene : SceneBase
 
 
 
-                // ---------------------------인벤토리 메뉴---------------------------------------------------------
-                case 3:
-                    ConsoleUI.WriteMenu(InventoryMenu, "아이템 선택");
-                    choice = ConsoleUI.ReadMenuChoice(InventoryMenu);
+                //// ---------------------------인벤토리 메뉴---------------------------------------------------------
+                //case 3:
+                //    ConsoleUI.WriteMenu(InventoryMenu, "아이템 선택");
+                //    choice = ConsoleUI.ReadMenuChoice(InventoryMenu);
 
-                    switch (choice)
-                    {
-                        case 0: // 취소                    
-                            context.AddLog("인벤토리 -> 선택메뉴"); // 디버깅
-                            menuHandler = 1;
-                            break;
-                    }
+                //    switch (choice)
+                //    {
+                //        case 0: // 취소                    
+                //            context.AddLog("인벤토리 -> 선택메뉴"); // 디버깅
+                //            menuHandler = 1;
+                //            break;
+                //    }
 
-                    break;
+                //    break;
 
             }
         }

@@ -34,18 +34,32 @@ public class EnemySpawner
         };
         EnemiesInMap[MapKey.Forest] = new List<EnemyKey>()
         {
-
+            EnemyKey.Goblin,
+            EnemyKey.Golem,
+            EnemyKey.BigBug,
         };
         EnemiesInMap[MapKey.Cave] = new List<EnemyKey>()
         {
+            EnemyKey.Golem,
+            EnemyKey.Mummy,
+            EnemyKey.Skeleton,
 
         };
         EnemiesInMap[MapKey.Castle] = new List<EnemyKey>()
         {
+            EnemyKey.Skeleton,
+            EnemyKey.Knight,
+            EnemyKey.Guardian,
+
+        };
+        EnemiesInMap[MapKey.BossMap] = new List<EnemyKey>()
+        {
+            EnemyKey.Boss,
 
         };
         EnemiesInMap[MapKey.Dummy] = new List<EnemyKey>()
         {
+            EnemyKey.Boss,
 
         };
     }
