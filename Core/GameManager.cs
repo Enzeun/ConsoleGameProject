@@ -107,6 +107,7 @@ public class GameManager
         AddScene(new MapScene());
         AddScene(new BattleScene());
         AddScene(new InventoryScene());
+        AddScene(new EquipmentScene());
     }
 
     private void AddScene(IScene scene)

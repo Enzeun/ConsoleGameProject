@@ -18,5 +18,6 @@ public enum SceneKey
     PopUpNaxtMap,
     BattleScene,
     InventoryScene,
+    EquipmentScene,
 
 }

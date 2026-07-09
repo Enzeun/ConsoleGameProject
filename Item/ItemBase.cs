@@ -1,4 +1,6 @@
-﻿using ConsoleGameFramework.Player;
+﻿using ConsoleGameFramework.Core;
+using ConsoleGameFramework.Player;
+using ConsoleGameFramework.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,5 +79,100 @@ public static class ItemData
             {118,new BigMpPotion()  },
             {999,new BossTicket()  },
         };
+
+
+    /// <summary>
+    /// 플레이어의 소모품 인벤토리를 메뉴로 변환하여 받아오는 함수 / 반환값 : 메뉴, Dict(메뉴번호,아이템Key값)
+    /// </summary>
+    /// <returns></returns>
+    public static (List<MenuOption> menu, Dictionary<int, int> mapping) MakeInventoryMenu()
+    {
+        PlayerBase Player = GameManager.Instance.Player;
+        Dictionary<int, int> mapping = new Dictionary<int, int>();
+        List<MenuOption> menu = new List<MenuOption>();
+
+        int count = 1;
+
+        foreach (int key in Player.ConsumableInventory.Keys)
+        {
+            int itemcount = Player.ConsumableInventory[key];
+
+            string itemName = Data[key].Name;
+
+            string itemDesc = Data[key].Description;
+
+            bool canUse = Player.ConsumableInventory[key] > 0;
+
+            MenuOption menuOption = new MenuOption(count, $"{itemName} X {itemcount} 개", $"{itemDesc}", canUse);
+
+            menu.Add(menuOption);
+
+            mapping[count] = key;
+
+            count++;
+        }
+
+        menu.Add(new MenuOption(0, "취소"));
+
+        return (menu, mapping);
+    }
+
+
+    /// <summary>
+    /// 플레이어의 장비 인벤토리를 메뉴로 변환하여 받아오는 함수 / 반환값 : 메뉴, Dict(메뉴번호,아이템Key값)
+    /// </summary>
+    /// <returns></returns>
+    public static (List<MenuOption> menu, Dictionary<int, int> mapping) MakeEquipmentMenu()
+    {
+        PlayerBase Player = GameManager.Instance.Player;
+        Dictionary<int, int> mapping = new Dictionary<int, int>();
+        List<MenuOption> menu = new List<MenuOption>();
+
+        int count = 1;
+
+        foreach (var item in Player.EquipmentInventory)
+        {            
+            string itemName = item.Name;
+
+            string itemDesc = "";
+
+            bool canUse = true;
+
+            if (item is Weapon)
+            {
+                Weapon weapon = (Weapon)item;
+                if (Player.EquippedWeapon == weapon)
+                {
+                    itemDesc = "[장비됨]";
+                    canUse = false;
+                }         
+                else if (Player.JobName != weapon.CompatibleJob)
+                {
+                    itemDesc = "[장비불가]";
+                    canUse = false;
+                }
+            }
+            else if (item is Armor)
+            {
+                if (Player.EquippedArmor == item)
+                {
+                    itemDesc = "[장비됨]";
+                    canUse = false;
+                }
+            }
+
+            MenuOption menuOption = new MenuOption(count, $"{itemName}", $"{itemDesc}", canUse);
+
+            menu.Add(menuOption);
+
+            mapping[count] = item.Id;
+
+            count++;
+        }
+
+        menu.Add(new MenuOption(0, "취소"));
+
+        return (menu, mapping);
+    }
 
 }

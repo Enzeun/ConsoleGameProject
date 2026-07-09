@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameProject.Scenes;
 
-public class InventoryScene : SceneBase
+public class EquipmentScene : SceneBase
 {
-    public override SceneKey Key => SceneKey.InventoryScene;
+    public override SceneKey Key => SceneKey.EquipmentScene;
 
     PlayerBase Player;
 
@@ -25,7 +25,7 @@ public class InventoryScene : SceneBase
 
         Player = GameManager.Instance.Player;
 
-        (Menu, ItemMapping) = ItemData.MakeInventoryMenu();
+        (Menu, ItemMapping) = ItemData.MakeEquipmentMenu();
 
        // InitializeMenu();
 
@@ -35,7 +35,7 @@ public class InventoryScene : SceneBase
         ConsoleUI.Clear();
         // ---------------------------타이틀 시작하는 곳---------------------------------------------------------
 
-        ConsoleUI.WriteTitle($"아이템 인벤토리");
+        ConsoleUI.WriteTitle($"장비 인벤토리");
 
         // ---------------------------타이틀 끝나는 곳---------------------------------------------------------
 
@@ -45,39 +45,13 @@ public class InventoryScene : SceneBase
 
         // ---------------------------메뉴---------------------------------------------------------
 
-        ConsoleUI.WriteMenu(Menu, "사용할 아이템 선택");
+        ConsoleUI.WriteMenu(Menu, "장착할 장비 선택");
 
         // ---------------------------로그---------------------------------------------------------
         ConsoleUI.WriteLog(context.Logs);
     }
 
-    
-    //private void InitializeMenu()
-    //{
-    //    Menu.Clear();
-    //    int count = 1;
-
-    //    foreach (int key in Player.ConsumableInventory.Keys)
-    //    {
-    //        int itemcount = Player.ConsumableInventory[key];
-
-    //        string itemName = ItemData.Data[key].Name;
-            
-    //        string itemDesc = ItemData.Data[key].Description;
-
-    //        bool canUse = Player.ConsumableInventory[key] > 0;
-
-    //        MenuOption menuOption = new MenuOption(count, $"{itemName} X {itemcount} 개", $"{itemDesc}", canUse);
-
-    //        Menu.Add(menuOption);
-
-    //        ItemMapping[count] = key;
-
-    //        count++;
-    //    }
-
-    //    Menu.Add(new MenuOption(0, "취소"));
-    //}
+  
     public override void HandleInput(GameContext context)
     {
         int choice = ConsoleUI.ReadMenuChoice(Menu);
@@ -98,7 +72,8 @@ public class InventoryScene : SceneBase
     {
         int key = ItemMapping[num];
 
-        Player.UseConsumableItem(key); 
+        Player.EquipArmor(key); 
+        Player.EquipWeapon(key); 
 
         ConsoleUI.WriteLine("아이템을 사용했습니다.");
     }

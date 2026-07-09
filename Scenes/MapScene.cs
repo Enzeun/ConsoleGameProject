@@ -115,7 +115,8 @@ public class MapScene : SceneBase
                 
         //new MenuOption(9, "레벨업."), // 디버깅용
         //new MenuOption(9, "타이틀로", "첫 화면으로 돌아갑니다."),
-        new MenuOption(0, "종료", "프로그램을 종료합니다.")
+        new MenuOption(0, "종료", "프로그램을 종료합니다."),
+        new MenuOption(8, "아이템 얻기", "프로그램을 종료합니다."), // 디버깅
     };
 
     public override void HandleInput(GameContext context)
@@ -139,12 +140,12 @@ public class MapScene : SceneBase
                 break;
 
             case 3:
-                GoTo(context, SceneKey.InventoryScene);
-
-                //GameManager.Instance.Player.GainExp(100);
-                //GoTo(context, SceneKey.Map);
+                GoTo(context, SceneKey.InventoryScene);             
                 break;
 
+            case 4:
+                GoTo(context, SceneKey.EquipmentScene);
+                break;
 
             case 9:
                 GoTo(context, SceneKey.NewTitle);
@@ -152,6 +153,18 @@ public class MapScene : SceneBase
 
             case 0:
                 context.Game.RequestQuit();
+                break;
+
+            case 8:
+                //Player.GainExp(100);
+                Player.AddEquimentItem(002);
+                Player.AddEquimentItem(003);
+                Player.AddEquimentItem(004);
+                Player.AddEquimentItem(006);
+                Player.AddEquimentItem(007);
+                Player.AddEquimentItem(008);
+                Player.AddConsumableItem(999);
+                //GoTo(context, SceneKey.Map);
                 break;
         }
     }

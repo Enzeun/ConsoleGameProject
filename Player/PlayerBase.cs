@@ -227,7 +227,7 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
         // 이미 가지고 있으면 false
         if (EquipmentInventory.Contains(item))
             return -2;
-        
+
         // 장비가 아님
         if (!(item is IEquipable))
             return -3;
@@ -288,16 +288,18 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
     public void AddConsumableItem(int itemId = 111)
     {
         // 데이터에 없는 아이템이면 return
-        if (!ItemData.Data.ContainsKey(itemId))
+        if (ItemData.Data.ContainsKey(itemId) == false)
         {
             GameManager.Instance.Context.AddLog("없는 아이템입니다");
             return;
         }
 
-        ItemBase item = ItemData.Data[itemId];
-
-        if (!(item is IConsumable))
+        // 소비아이템이 맞는지 확인
+        if (ItemData.Data[itemId] is not UsableItem item)
+        {
+            GameManager.Instance.Context.AddLog("소비 아이템 이 아닙니다");
             return;
+        }
 
         if (ConsumableInventory.ContainsKey(itemId))
         {
@@ -314,10 +316,25 @@ public abstract class PlayerBase : IDamageable, ISkillCaster
     /// <returns></returns>
     public bool UseConsumableItem(int itemId = 111)
     {
-        UsableItem item = (UsableItem)ItemData.Data[itemId];
-
-        if (!(item is IConsumable))
+        // 데이터에 없는 아이템이면 return
+        if (ItemData.Data.ContainsKey(itemId) == false)
+        {
+            GameManager.Instance.Context.AddLog("없는 아이템입니다");
             return false;
+        }
+        // 소비아이템이 맞는지 확인
+        if (ItemData.Data[itemId] is not UsableItem item)
+        {
+            GameManager.Instance.Context.AddLog("소비 아이템 이 아닙니다");
+            return false;
+        }
+        // 소모할 수 있는 소비아이템인지
+        if (ItemData.Data[itemId] is not IConsumable)
+        {
+            GameManager.Instance.Context.AddLog("이 아이템은 소모할 수 있는 아이템이 아닙니다.");
+            return false;
+        }
+        // item = (UsableItem)ItemData.Data[itemId];
 
         if (ConsumableInventory.ContainsKey(itemId))
         {

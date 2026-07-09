@@ -63,6 +63,7 @@ public class WoodStaff : Weapon, IEquipable
     public WoodStaff() : base(006, "나무 지팡이")
     {
         Attack = 20;
+        CompatibleJob = "마법사";
     }
 
 }
@@ -72,6 +73,7 @@ public class Staff : Weapon, IEquipable
     public Staff() : base(007, "좋은 지팡이")
     {
         Attack = 40;
+        CompatibleJob = "마법사";
     }
 
 }
@@ -81,6 +83,7 @@ public class GreatStaff : Weapon, IEquipable
     public GreatStaff() : base(008, "마도사의 지팡이")
     {
         Attack = 80;
+        CompatibleJob = "마법사";
     }
 
 }
