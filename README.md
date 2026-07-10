@@ -8,7 +8,7 @@
 실행방법 : 
 
 폴더 최 상단에 있는 
-"ConsoleGameProject.exe - 바로 가기"
+"ConsoleGameProject.exe"
 파일로 실행
 
 
