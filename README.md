@@ -9,6 +9,6 @@
 
 폴더 최 상단에 있는 
 "ConsoleGameProject.exe"
-파일로 실행
+바로가기 파일로 실행
 
 
